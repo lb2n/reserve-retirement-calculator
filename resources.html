@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Authoritative resources for U.S. military reserve retirement, including NDAA legislation, DFAS guides, and official personnel office links.">
+    <meta name="keywords" content="military retirement resources, NDAA, reserve retirement law, DFAS, military pay, 10 USC, reserve benefits">
+    <meta name="author" content="Reserve Retirement Calculator">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Reserve Retirement Resources">
+    <meta property="og:description" content="Official resources and legislation for U.S. military reserve retirement benefits.">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Reserve Retirement Resources">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <title>Reserve Retirement Resources | Official Links & Legislation</title>
+    <style>
+        :root {
+            --navy-primary: #003366;
+            --navy-dark: #001a33;
+            --navy-light: #004d99;
+            --gold: #c9a227;
+            --gold-light: #d4b85a;
+            --white: #ffffff;
+            --gray-light: #f0f4f8;
+            --gray: #b8c0cc;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--navy-dark);
+            min-height: 100vh;
+            color: var(--white);
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 120px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 120px);
+            background:
+                linear-gradient(180deg,
+                    rgba(0, 26, 51, 0.65) 0%,
+                    rgba(0, 51, 102, 0.55) 50%,
+                    rgba(0, 77, 153, 0.45) 100%),
+                url('BlueAngelsPic.jpeg') center top / cover no-repeat;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: #001a33;
+            z-index: -1;
+        }
+
+        body {
+            background: linear-gradient(180deg,
+                #0a1628 0%,
+                #1a3a5c 25%,
+                #2d5a87 50%,
+                #4a90c2 75%,
+                #87ceeb 100%);
+        }
+
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--gold);
+            color: var(--navy-dark);
+            padding: 8px 16px;
+            z-index: 1000;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Focus styles */
+        *:focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 2px;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: rgba(0, 26, 51, 0.95);
+            padding: 0.5rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-bar ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-bar a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-bar a:hover,
+        .nav-bar a.active {
+            color: var(--gold);
+        }
+
+        .header {
+            background: #001a33;
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--navy-dark);
+            border: 3px solid var(--white);
+        }
+
+        .anchor-icon::before {
+            content: "⚓";
+            font-size: 2.5rem;
+        }
+
+        .header-text h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header-text p {
+            color: var(--gold);
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .intro {
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .intro p {
+            margin-bottom: 0.5rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section h2 {
+            color: var(--gold);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section h2 span {
+            font-size: 1.5rem;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .resource-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--white);
+        }
+
+        .resource-card h3 a {
+            color: var(--gold-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .resource-card h3 a:hover {
+            color: var(--gold);
+            text-decoration: underline;
+        }
+
+        .resource-card p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
+        }
+
+        .resource-card .source {
+            font-size: 0.8rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+
+        .resource-card .tag {
+            display: inline-block;
+            background: rgba(201, 162, 39, 0.2);
+            color: var(--gold);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-card .tag.official {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .resource-card .tag.law {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+
+        .legislation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .legislation-table th,
+        .legislation-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .legislation-table th {
+            background: rgba(0, 51, 102, 0.5);
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .legislation-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .legislation-table a {
+            color: var(--gold-light);
+            text-decoration: none;
+        }
+
+        .legislation-table a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            background: rgba(0, 26, 51, 0.95);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--gray);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Print styles */
+        @media print {
+            body::before, body::after, .nav-bar {
+                display: none !important;
+            }
+            body { background: white !important; color: black !important; }
+            .header { background: white !important; color: black !important; position: relative !important; }
+            .resource-card { background: white !important; border: 1px solid #ccc !important; }
+            a { color: #003366 !important; }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .legislation-table {
+                font-size: 0.8rem;
+            }
+
+            .legislation-table th,
+            .legislation-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header { padding: 1rem; }
+            .header-content { flex-direction: column; text-align: center; gap: 1rem; }
+            .header-text h1 { font-size: 1.25rem; }
+            .container { padding: 1rem; }
+            .nav-bar { padding: 0.5rem 1rem; }
+            .nav-bar ul { flex-wrap: wrap; gap: 1rem; justify-content: center; }
+
+            .legislation-table thead { display: none; }
+            .legislation-table tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                padding: 0.5rem;
+            }
+            .legislation-table td {
+                display: block;
+                padding: 0.5rem;
+                border: none;
+            }
+            .legislation-table td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: var(--gold);
+                display: block;
+                margin-bottom: 0.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav class="nav-bar" aria-label="Main navigation">
+        <ul>
+            <li><a href="index.html">Retirement Pay Calculator</a></li>
+            <li><a href="early-retirement-calculator.html">Early Retirement Eligibility</a></li>
+            <li><a href="resources.html" class="active" aria-current="page">Resources</a></li>
+        </ul>
+    </nav>
+
+    <header class="header" role="banner">
+        <div class="header-content">
+            <div class="logo anchor-icon"></div>
+            <div class="header-text">
+                <h1>Reserve Retirement Resources</h1>
+                <p>Official Links, Legislation & Reference Materials</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" id="main-content" role="main">
+        <div class="intro">
+            <p><strong>This page provides links to authoritative sources</strong> for U.S. military reserve and National Guard retirement information. Always verify important decisions with official sources and your servicing personnel office.</p>
+            <p>Links open in new tabs and go to official government (.gov/.mil) websites when possible.</p>
+        </div>
+
+        <!-- NDAA Legislation Section -->
+        <section class="section">
+            <h2><span>📜</span> Key Legislation (NDAA)</h2>
+            <p style="margin-bottom: 1rem; color: var(--gray);">The National Defense Authorization Acts that established and modified reserve early retirement provisions:</p>
+
+            <table class="legislation-table">
+                <thead>
+                    <tr>
+                        <th>Law</th>
+                        <th>Section</th>
+                        <th>Description</th>
+                        <th>Effective</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Law"><a href="https://www.congress.gov/110/plaws/publ181/PLAW-110publ181.pdf" target="_blank" rel="noopener noreferrer">NDAA 2008 (P.L. 110-181)</a></td>
+                        <td data-label="Section">Section 647</td>
+                        <td data-label="Description">Established early retirement for qualifying active duty service (90 days = 3 months reduction, minimum age 50)</td>
+                        <td data-label="Effective">Jan 28, 2008</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Law"><a href="https://www.congress.gov/111/plaws/publ84/PLAW-111publ84.pdf" target="_blank" rel="noopener noreferrer">NDAA 2010 (P.L. 111-84)</a></td>
+                        <td data-label="Section">Section 647</td>
+                        <td data-label="Description">Added 12304b (preplanned missions) as qualifying service</td>
+                        <td data-label="Effective">Oct 28, 2009</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Law"><a href="https://www.congress.gov/112/plaws/publ81/PLAW-112publ81.pdf" target="_blank" rel="noopener noreferrer">NDAA 2012 (P.L. 112-81)</a></td>
+                        <td data-label="Section">Section 504</td>
+                        <td data-label="Description">Extended 12304b provisions and clarified qualifying service</td>
+                        <td data-label="Effective">Dec 31, 2011</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Law"><a href="https://www.congress.gov/113/plaws/publ291/PLAW-113publ291.pdf" target="_blank" rel="noopener noreferrer">NDAA 2015 (P.L. 113-291)</a></td>
+                        <td data-label="Section">Section 621</td>
+                        <td data-label="Description">Allowed 90-day periods to span consecutive fiscal years (previously had to be within same FY)</td>
+                        <td data-label="Effective">Oct 1, 2014 (FY2015)</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Law"><a href="https://www.congress.gov/114/plaws/publ328/PLAW-114publ328.pdf" target="_blank" rel="noopener noreferrer">NDAA 2017 (P.L. 114-328)</a></td>
+                        <td data-label="Section">Section 514</td>
+                        <td data-label="Description">Further clarifications to reserve retirement provisions</td>
+                        <td data-label="Effective">Dec 23, 2016</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Title 10 U.S. Code Section -->
+        <section class="section">
+            <h2><span>⚖️</span> Relevant U.S. Code Sections</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <span class="tag law">Title 10</span>
+                    <h3><a href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title10-section12731&num=0&edition=prelim" target="_blank" rel="noopener noreferrer">10 U.S.C. § 12731 - Age and Service Requirements</a></h3>
+                    <p>Primary statute governing reserve retirement eligibility, including the early retirement provisions (subsection f).</p>
+                    <p class="source">U.S. House of Representatives - Office of Law Revision Counsel</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag law">Title 10</span>
+                    <h3><a href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title10-section12301&num=0&edition=prelim" target="_blank" rel="noopener noreferrer">10 U.S.C. § 12301 - Reserve Components Generally</a></h3>
+                    <p>Defines various types of active duty orders including 12301(a), 12301(b), and 12301(d) - key for determining qualifying service.</p>
+                    <p class="source">U.S. House of Representatives - Office of Law Revision Counsel</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag law">Title 10</span>
+                    <h3><a href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title10-section12302&num=0&edition=prelim" target="_blank" rel="noopener noreferrer">10 U.S.C. § 12302 - Ready Reserve (Involuntary)</a></h3>
+                    <p>Presidential authority to order Ready Reserve members to active duty during national emergency. Qualifies for early retirement.</p>
+                    <p class="source">U.S. House of Representatives - Office of Law Revision Counsel</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag law">Title 10</span>
+                    <h3><a href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title10-section12304&num=0&edition=prelim" target="_blank" rel="noopener noreferrer">10 U.S.C. § 12304 - Selected Reserve Order to Active Duty</a></h3>
+                    <p>Authority for contingency operations. Includes 12304, 12304a (CONUS emergencies), and 12304b (preplanned missions).</p>
+                    <p class="source">U.S. House of Representatives - Office of Law Revision Counsel</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag law">Title 32</span>
+                    <h3><a href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title32-section502&num=0&edition=prelim" target="_blank" rel="noopener noreferrer">32 U.S.C. § 502(f) - National Guard Duty</a></h3>
+                    <p>Title 32 duty for homeland defense when federally funded. Qualifies for early retirement when supporting a national emergency.</p>
+                    <p class="source">U.S. House of Representatives - Office of Law Revision Counsel</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag law">Title 10</span>
+                    <h3><a href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title10-section12739&num=0&edition=prelim" target="_blank" rel="noopener noreferrer">10 U.S.C. § 12739 - Computation of Retired Pay</a></h3>
+                    <p>How reserve retirement pay is calculated using the points system and High-36 or BRS formulas.</p>
+                    <p class="source">U.S. House of Representatives - Office of Law Revision Counsel</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Official Resources Section -->
+        <section class="section">
+            <h2><span>🏛️</span> Official Government Resources</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <span class="tag official">Official</span>
+                    <h3><a href="https://www.dfas.mil/RetiredMilitary/plan/estimate/" target="_blank" rel="noopener noreferrer">DFAS Retirement Pay Estimator</a></h3>
+                    <p>Official Defense Finance and Accounting Service calculator for military retirement pay estimates.</p>
+                    <p class="source">Defense Finance and Accounting Service (DFAS)</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag official">Official</span>
+                    <h3><a href="https://militarypay.defense.gov/Pay/Retirement/" target="_blank" rel="noopener noreferrer">Military Compensation - Retirement</a></h3>
+                    <p>Comprehensive overview of military retirement systems including reserve retirement rules and BRS information.</p>
+                    <p class="source">Office of the Secretary of Defense</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag official">Official</span>
+                    <h3><a href="https://militarypay.defense.gov/Calculators/" target="_blank" rel="noopener noreferrer">Military Pay Calculators</a></h3>
+                    <p>Official DoD calculators including Regular Military Compensation, BRS comparison, and retirement calculators.</p>
+                    <p class="source">Office of the Secretary of Defense</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag official">Official</span>
+                    <h3><a href="https://www.dfas.mil/RetiredMilitary/plan/Gray-Area-Retirees/" target="_blank" rel="noopener noreferrer">Gray Area Retirees Information</a></h3>
+                    <p>DFAS guidance for reserve members in the "gray area" between qualifying for retirement and receiving pay at age 60.</p>
+                    <p class="source">Defense Finance and Accounting Service (DFAS)</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag official">Official</span>
+                    <h3><a href="https://www.dfas.mil/RetiredMilitary/survivors/SBP-Overview/" target="_blank" rel="noopener noreferrer">Survivor Benefit Plan (SBP) Overview</a></h3>
+                    <p>Official information about SBP enrollment, costs, and benefits for military retirees and their families.</p>
+                    <p class="source">Defense Finance and Accounting Service (DFAS)</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag official">Official</span>
+                    <h3><a href="https://www.tricare.mil/Plans/Eligibility/Retirees" target="_blank" rel="noopener noreferrer">TRICARE Retiree Eligibility</a></h3>
+                    <p>Healthcare eligibility information for military retirees, including gray area and retired reserve members.</p>
+                    <p class="source">TRICARE</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Branch-Specific Resources -->
+        <section class="section">
+            <h2><span>🎖️</span> Service Branch Resources</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <span class="tag">Navy</span>
+                    <h3><a href="https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Reserve-Retirements/" target="_blank" rel="noopener noreferrer">Navy Reserve Retirements</a></h3>
+                    <p>Navy-specific reserve retirement information including NDAA early retirement guidance and points accounting.</p>
+                    <p class="source">MyNavy HR</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag">Army</span>
+                    <h3><a href="https://www.hrc.army.mil/content/Gray%20Area%20Retirements%20Branch" target="_blank" rel="noopener noreferrer">Army Gray Area Retirements</a></h3>
+                    <p>Army Human Resources Command information for reserve soldiers in the gray area awaiting retirement pay.</p>
+                    <p class="source">Army Human Resources Command (HRC)</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag">Air Force</span>
+                    <h3><a href="https://www.arpc.afrc.af.mil/Services/Retirements/" target="_blank" rel="noopener noreferrer">Air Force Reserve Retirements</a></h3>
+                    <p>Air Reserve Personnel Center retirement services for Air Force Reserve and Air National Guard members.</p>
+                    <p class="source">Air Reserve Personnel Center (ARPC)</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag">Marine Corps</span>
+                    <h3><a href="https://www.manpower.usmc.mil/webcenter/portal/MMRP_Portal" target="_blank" rel="noopener noreferrer">Marine Corps Reserve Manpower</a></h3>
+                    <p>Marine Corps Reserve retirement and personnel management information.</p>
+                    <p class="source">Marine Corps Manpower & Reserve Affairs</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag">Coast Guard</span>
+                    <h3><a href="https://www.dcms.uscg.mil/Our-Organization/Assistant-Commandant-for-Human-Resources-CG-1/Reserve-CG-131/" target="_blank" rel="noopener noreferrer">Coast Guard Reserve</a></h3>
+                    <p>Coast Guard Reserve personnel and retirement information.</p>
+                    <p class="source">U.S. Coast Guard</p>
+                </div>
+
+                <div class="resource-card">
+                    <span class="tag">National Guard</span>
+                    <h3><a href="https://www.nationalguard.mil/Resources/Benefits/" target="_blank" rel="noopener noreferrer">National Guard Benefits</a></h3>
+                    <p>Benefits information for Army National Guard and Air National Guard members including retirement.</p>
+                    <p class="source">National Guard Bureau</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional References -->
+        <section class="section">
+            <h2><span>📚</span> Additional References</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3><a href="https://crsreports.congress.gov/search/#/?termsToSearch=military%20retirement" target="_blank" rel="noopener noreferrer">Congressional Research Service Reports</a></h3>
+                    <p>In-depth analysis of military retirement legislation and policy from the non-partisan Congressional Research Service.</p>
+                    <p class="source">Library of Congress</p>
+                </div>
+
+                <div class="resource-card">
+                    <h3><a href="https://www.va.gov/resources/" target="_blank" rel="noopener noreferrer">VA Resources</a></h3>
+                    <p>Veterans Affairs resources - note that VA benefits are separate from military retirement but often used together.</p>
+                    <p class="source">Department of Veterans Affairs</p>
+                </div>
+
+                <div class="resource-card">
+                    <h3><a href="https://www.tsp.gov/" target="_blank" rel="noopener noreferrer">Thrift Savings Plan (TSP)</a></h3>
+                    <p>The federal retirement savings plan available to military members. Essential for BRS participants.</p>
+                    <p class="source">Federal Retirement Thrift Investment Board</p>
+                </div>
+
+                <div class="resource-card">
+                    <h3><a href="https://militarypay.defense.gov/Pay/Basic-Pay/AnnualPayRaise/" target="_blank" rel="noopener noreferrer">Military Pay Raise History</a></h3>
+                    <p>Historical military pay raises - useful for estimating future pay table growth for retirement planning.</p>
+                    <p class="source">Office of the Secretary of Defense</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <p>This resource page provides links to official government sources. We are not affiliated with the Department of Defense, DFAS, or any government agency.</p>
+        <p style="margin-top: 0.5rem;">Links are provided for informational purposes. Always verify information with official sources.</p>
+        <p style="margin-top: 1rem;">
+            <a href="index.html">Retirement Pay Calculator</a> |
+            <a href="early-retirement-calculator.html">Early Retirement Eligibility</a> |
+            <a href="resources.html">Resources</a>
+        </p>
+    </footer>
+</body>
+</html>
