@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate your early retirement eligibility based on qualifying active duty orders under NDAA 2008. Track 90-day periods and determine your reduced retirement age.">
+    <meta name="keywords" content="military early retirement, reserve early retirement, NDAA 2008, qualifying orders, 12301, 12302, 12304, gray area retirement">
+    <meta name="author" content="Reserve Retirement Calculator">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Reserve Early Retirement Eligibility Calculator">
+    <meta property="og:description" content="Calculate your reduced retirement age based on qualifying active duty service under NDAA 2008.">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Reserve Early Retirement Eligibility Calculator">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <title>Early Retirement Eligibility Calculator | Reserve & National Guard</title>
+    <style>
+        :root {
+            --navy-primary: #003366;
+            --navy-dark: #001a33;
+            --navy-light: #004d99;
+            --gold: #c9a227;
+            --gold-light: #d4b85a;
+            --white: #ffffff;
+            --gray-light: #f0f4f8;
+            --gray: #b8c0cc;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--navy-dark);
+            min-height: 100vh;
+            color: var(--white);
+            position: relative;
+        }
+
+        /* Blue Angels background image - starts below the sticky header */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 120px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 120px);
+            background:
+                linear-gradient(180deg,
+                    rgba(0, 26, 51, 0.65) 0%,
+                    rgba(0, 51, 102, 0.55) 50%,
+                    rgba(0, 77, 153, 0.45) 100%),
+                url('BlueAngelsPic.jpeg') center top / cover no-repeat;
+            z-index: -2;
+        }
+
+        /* Dark navy background that fills the area behind the header */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: #001a33;
+            z-index: -1;
+        }
+
+        body {
+            background: linear-gradient(180deg,
+                #0a1628 0%,
+                #1a3a5c 25%,
+                #2d5a87 50%,
+                #4a90c2 75%,
+                #87ceeb 100%);
+        }
+
+        .header {
+            background: #001a33;
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--navy-dark);
+            border: 3px solid var(--white);
+        }
+
+        .anchor-icon::before {
+            content: "⚓";
+            font-size: 2.5rem;
+        }
+
+        .header-text h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header-text p {
+            color: var(--gold);
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .nav-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--gold-light);
+        }
+
+        .nav-link::before {
+            content: "← ";
+        }
+
+        .disclaimer {
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .disclaimer strong {
+            color: var(--gold);
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-box h3 {
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .info-box p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--gray-light);
+        }
+
+        .info-box ul {
+            margin-top: 0.75rem;
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: var(--gray-light);
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .card-header svg {
+            width: 28px;
+            height: 28px;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--gray-light);
+        }
+
+        .form-group .hint {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.25rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        select option {
+            background: var(--navy-dark);
+            color: var(--white);
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 0.75rem;
+            align-items: end;
+        }
+
+        @media (max-width: 600px) {
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn {
+            padding: 0.75rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--navy-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--navy-dark);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 162, 39, 0.4);
+        }
+
+        .orders-list {
+            margin-top: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .order-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-item.qualifying {
+            border-left: 4px solid var(--success);
+        }
+
+        .order-item.non-qualifying {
+            border-left: 4px solid var(--danger);
+            opacity: 0.7;
+        }
+
+        .order-details {
+            flex: 1;
+        }
+
+        .order-details .order-type {
+            font-weight: 600;
+            color: var(--white);
+            font-size: 0.95rem;
+        }
+
+        .order-details .order-dates {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 0.25rem;
+        }
+
+        .order-details .order-days {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-top: 0.25rem;
+        }
+
+        .order-status {
+            text-align: right;
+            margin-left: 1rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.qualifying {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .status-badge.non-qualifying {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .results-section {
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(201, 162, 39, 0.05) 100%);
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .result-card h3 {
+            font-size: 1rem;
+            color: var(--gold-light);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .result-card .amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .result-card .subtext {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .summary-item .label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-item .value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-top: 0.25rem;
+        }
+
+        .summary-item .value.highlight {
+            color: var(--gold);
+        }
+
+        .breakdown {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .breakdown h4 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .breakdown-row:last-child {
+            border-bottom: none;
+        }
+
+        .breakdown-row.total {
+            font-weight: 600;
+            color: var(--gold);
+            border-top: 2px solid var(--gold);
+            margin-top: 0.5rem;
+            padding-top: 0.75rem;
+        }
+
+        .order-types-reference {
+            margin-top: 2rem;
+        }
+
+        .order-types-reference h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .order-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .order-type-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .order-type-card.qualifies {
+            border-left: 4px solid var(--success);
+        }
+
+        .order-type-card.does-not-qualify {
+            border-left: 4px solid var(--danger);
+        }
+
+        .order-type-card h4 {
+            font-size: 0.95rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .order-type-card .legal-ref {
+            font-size: 0.8rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .order-type-card p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        .info-tooltip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            font-size: 0.75rem;
+            cursor: help;
+            margin-left: 0.5rem;
+            position: relative;
+        }
+
+        .info-tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--navy-dark);
+            color: var(--white);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 400;
+            white-space: normal;
+            width: 280px;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--gold);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            z-index: 1000;
+            line-height: 1.4;
+        }
+
+        .info-tooltip::before {
+            content: '';
+            position: absolute;
+            bottom: calc(100% + 2px);
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--gold);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            z-index: 1001;
+        }
+
+        .info-tooltip:hover::after,
+        .info-tooltip:hover::before,
+        .info-tooltip:focus::after,
+        .info-tooltip:focus::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+        }
+
+        .empty-state svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .fiscal-year-note {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid var(--warning);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--warning);
+        }
+
+        /* Skip link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--gold);
+            color: var(--navy-dark);
+            padding: 8px 16px;
+            z-index: 1000;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Focus styles */
+        *:focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 2px;
+        }
+
+        /* Navigation bar */
+        .nav-bar {
+            background: rgba(0, 26, 51, 0.95);
+            padding: 0.5rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-bar ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-bar a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-bar a:hover,
+        .nav-bar a.active {
+            color: var(--gold);
+        }
+
+        /* Print styles */
+        @media print {
+            body::before, body::after, .nav-bar, .btn, .nav-link {
+                display: none !important;
+            }
+            body { background: white !important; color: black !important; }
+            .header { background: white !important; color: black !important; position: relative !important; }
+            .card { background: white !important; border: 1px solid #ccc !important; }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            .header { padding: 1rem; }
+            .header-content { flex-direction: column; text-align: center; gap: 1rem; }
+            .header-text h1 { font-size: 1.25rem; }
+            .container { padding: 1rem; }
+            .nav-bar { padding: 0.5rem 1rem; }
+            .nav-bar ul { flex-wrap: wrap; gap: 1rem; justify-content: center; }
+            .card { padding: 1rem; }
+            .input-row { grid-template-columns: 1fr; }
+            .summary-grid { grid-template-columns: repeat(2, 1fr); }
+            .order-type-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 400px) {
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="nav-bar" aria-label="Main navigation">
+        <ul>
+            <li><a href="index.html">Retirement Pay Calculator</a></li>
+            <li><a href="early-retirement-calculator.html" class="active" aria-current="page">Early Retirement Eligibility</a></li>
+        </ul>
+    </nav>
+
+    <header class="header" role="banner">
+        <div class="header-content">
+            <div class="logo anchor-icon"></div>
+            <div class="header-text">
+                <h1>Early Retirement Eligibility Calculator</h1>
+                <p>Calculate Your Reduced Retirement Age Based on Qualifying Active Duty</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" id="main-content" role="main">
+        <div class="disclaimer" role="alert">
+            <strong>⚠️ Disclaimer:</strong> This calculator provides <strong>estimates only</strong> based on the 2008 NDAA and subsequent amendments.
+            Verify your qualifying service with your personnel office. Rules differ based on when orders were issued and fiscal year boundaries.
+            <strong>We do not collect or store any information you enter.</strong>
+        </div>
+
+        <div class="info-box">
+            <h3>📋 How Early Retirement Works</h3>
+            <p>The 2008 National Defense Authorization Act allows Reserve and Guard members to reduce their retirement eligibility age below 60 (minimum age 50) based on qualifying active duty service after January 28, 2008.</p>
+            <ul>
+                <li><strong>90 days</strong> of qualifying service = <strong>3 months</strong> reduction in retirement age</li>
+                <li>Days can be cumulative across multiple orders</li>
+                <li>Before FY2015: Days must be within the same fiscal year</li>
+                <li>FY2015 and later: Days can span consecutive fiscal years</li>
+                <li>Maximum reduction: 10 years (retire as early as age 50)</li>
+            </ul>
+        </div>
+
+        <div class="main-grid">
+            <!-- Input Section -->
+            <div class="card">
+                <div class="card-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                    </svg>
+                    <h2>Add Your Active Duty Orders</h2>
+                </div>
+
+                <div class="form-group">
+                    <label>Type of Orders
+                        <span class="info-tooltip" tabindex="0" data-tooltip="Check the AUTHORITY on your orders (e.g., 12301(d) vs 12301(b)). The same duty type can qualify or not depending on the legal authority. ADT under 12301(d) QUALIFIES; ADT under 12301(b) does NOT.">?</span>
+                    </label>
+                    <select id="orderType">
+                        <optgroup label="✓ Qualifying Orders">
+                            <option value="mob-involuntary">Involuntary Mobilization (Presidential Reserve Call-up)</option>
+                            <option value="mob-partial">Partial Mobilization (up to 1 million reserves)</option>
+                            <option value="contingency">Contingency Operations (12304)</option>
+                            <option value="contingency-12304b">Preplanned Mission Support - 12304b (After 2011)</option>
+                            <option value="national-emergency">National Emergency (12301a)</option>
+                            <option value="voluntary-12301d">Voluntary Active Duty (ADOS/ADSW - 12301d)</option>
+                            <option value="unit-org-12301">Full-Time Unit Support (12301d)</option>
+                            <option value="homeland-defense">Homeland Defense / DSCA (Federally funded Title 32)</option>
+                            <option value="conus-response">CONUS Disaster/Emergency Response (12304a)</option>
+                            <option value="medical-12301h">Medical Care / Treatment Orders (12301h)</option>
+                            <option value="insurrection">Insurrection / Civil Disturbance (Chapter 13)</option>
+                            <option value="invasion-12406">Invasion / Rebellion Response (12406)</option>
+                            <option value="recall-retired">Recall of Retired Members (688)</option>
+                            <option value="full-mob">Full Mobilization (Congressional declaration)</option>
+                            <option value="stop-loss">Stop Loss / Involuntary Retention (12305)</option>
+                        </optgroup>
+                        <optgroup label="⚠ Check Your Orders Authority">
+                            <option value="adt-12301d">ADT under 12301(d) - QUALIFIES ✓</option>
+                            <option value="adt-12301b">ADT under 12301(b) - Does NOT qualify ✗</option>
+                        </optgroup>
+                        <optgroup label="✗ Non-Qualifying Orders">
+                            <option value="at">Annual Training (AT) - 12301(b)</option>
+                            <option value="idt">Inactive Duty Training (IDT / Drills)</option>
+                            <option value="agr">Active Guard Reserve (AGR / 12310)</option>
+                            <option value="funeral-honors">Funeral Honors Duty</option>
+                            <option value="muta">Multiple Unit Training Assembly (MUTA)</option>
+                            <option value="school">Military Schools / PME Courses</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="input-row">
+                    <div class="form-group">
+                        <label>Start Date</label>
+                        <input type="date" id="startDate">
+                    </div>
+                    <div class="form-group">
+                        <label>End Date</label>
+                        <input type="date" id="endDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Days
+                            <span class="info-tooltip" tabindex="0" data-tooltip="Auto-calculated from dates, or enter manually if you know the exact number of creditable days.">?</span>
+                        </label>
+                        <input type="number" id="manualDays" placeholder="Auto">
+                    </div>
+                    <button class="btn btn-primary" onclick="addOrder()">Add</button>
+                </div>
+
+                <div class="fiscal-year-note" id="fiscalYearNote" style="display: none;">
+                    ⚠️ Note: These dates span multiple fiscal years. Days will be calculated according to the applicable rules.
+                </div>
+
+                <div class="orders-list" id="ordersList">
+                    <div class="empty-state">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        <p>No orders added yet.<br>Add your qualifying active duty periods above.</p>
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateReduction()">
+                    ⚓ Calculate Age Reduction
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="card results-section" id="resultsSection">
+                <div class="card-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h2>Your Early Retirement Eligibility</h2>
+                </div>
+
+                <div class="result-card">
+                    <h3>New Retirement Eligibility Age</h3>
+                    <div class="amount" id="newAge">60</div>
+                    <div class="subtext" id="reductionAmount">No reduction (standard age 60)</div>
+                </div>
+
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="label">Total Qualifying Days</div>
+                        <div class="value highlight" id="totalQualifyingDays">0</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">90-Day Periods</div>
+                        <div class="value" id="totalPeriods">0</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Months Reduced</div>
+                        <div class="value highlight" id="monthsReduced">0</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Leftover Days</div>
+                        <div class="value" id="leftoverDays">0</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Non-Qualifying Days</div>
+                        <div class="value" id="nonQualifyingDays">0</div>
+                    </div>
+                </div>
+
+                <div id="leftoverNote" style="display: none; background: rgba(245, 158, 11, 0.15); border: 1px solid var(--warning); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 0.85rem;">
+                    <strong>⚠️ Leftover Days:</strong> <span id="leftoverExplanation"></span>
+                </div>
+
+                <div class="breakdown">
+                    <h4>Qualifying Orders Breakdown</h4>
+                    <div id="qualifyingBreakdown">
+                        <div class="breakdown-row">
+                            <span>No qualifying orders added</span>
+                            <span>0 days</span>
+                        </div>
+                    </div>
+                    <div class="breakdown-row total">
+                        <span>Total Reduction</span>
+                        <span id="totalReductionText">0 months (0 years)</span>
+                    </div>
+                </div>
+
+                <div class="breakdown" style="margin-top: 1rem; background: rgba(201, 162, 39, 0.1);">
+                    <h4>ℹ️ Important Notes</h4>
+                    <ul style="font-size: 0.85rem; line-height: 1.6; padding-left: 1.25rem; color: var(--gray-light);">
+                        <li>Only service after January 28, 2008 qualifies for early retirement</li>
+                        <li>12304b orders qualify retroactively to 2011 (FY20 NDAA fix)</li>
+                        <li>Maximum reduction is 10 years (minimum eligibility age 50)</li>
+                        <li>Verify all qualifying service with your personnel office</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Types Reference -->
+        <div class="order-types-reference">
+            <h3>📚 Quick Reference: Order Types Explained</h3>
+
+            <h4 style="color: var(--success); margin: 1.5rem 0 1rem 0;">✓ Qualifying Orders</h4>
+            <div class="order-type-grid">
+                <div class="order-type-card qualifies">
+                    <h4>Involuntary Mobilization</h4>
+                    <div class="legal-ref">10 U.S.C. § 12302</div>
+                    <p>Called to active duty by the President during a national emergency. Up to 1 million reserves for up to 24 months.</p>
+                </div>
+                <div class="order-type-card qualifies">
+                    <h4>Contingency Operations</h4>
+                    <div class="legal-ref">10 U.S.C. § 12304</div>
+                    <p>Pre-planned missions requiring additional personnel. Includes combat operations, peacekeeping, and humanitarian missions.</p>
+                </div>
+                <div class="order-type-card qualifies">
+                    <h4>Preplanned Mission Support</h4>
+                    <div class="legal-ref">10 U.S.C. § 12304b</div>
+                    <p>Preplanned missions for combatant commander requirements. Qualifies for orders starting January 2011 or later.</p>
+                </div>
+                <div class="order-type-card qualifies">
+                    <h4>National Emergency</h4>
+                    <div class="legal-ref">10 U.S.C. § 12301(a)</div>
+                    <p>Active duty during war or national emergency declared by President or Congress.</p>
+                </div>
+                <div class="order-type-card qualifies">
+                    <h4>Voluntary Active Duty (ADOS/ADSW)</h4>
+                    <div class="legal-ref">10 U.S.C. § 12301(d)</div>
+                    <p>Voluntary tours, temporary duty, and special work. <strong>QUALIFIES</strong> for early retirement under current law.</p>
+                </div>
+                <div class="order-type-card qualifies">
+                    <h4>CONUS Disaster/Emergency</h4>
+                    <div class="legal-ref">10 U.S.C. § 12304a</div>
+                    <p>Response to major disasters or emergencies within the United States under Title 10 authority.</p>
+                </div>
+                <div class="order-type-card qualifies">
+                    <h4>Homeland Defense (Title 32)</h4>
+                    <div class="legal-ref">32 U.S.C. § 502(f)</div>
+                    <p>National Guard duty for homeland defense when federally funded and responding to national emergency.</p>
+                </div>
+                <div class="order-type-card qualifies">
+                    <h4>Medical Care Orders</h4>
+                    <div class="legal-ref">10 U.S.C. § 12301(h)</div>
+                    <p>Active duty for medical care, treatment, or medical evaluation purposes.</p>
+                </div>
+                <div class="order-type-card qualifies">
+                    <h4>Stop Loss / Involuntary Retention</h4>
+                    <div class="legal-ref">10 U.S.C. § 12305</div>
+                    <p>Involuntary retention on active duty during war or national emergency.</p>
+                </div>
+                <div class="order-type-card qualifies">
+                    <h4>Recall of Retired Members</h4>
+                    <div class="legal-ref">10 U.S.C. § 688</div>
+                    <p>Retired members recalled to active duty for operational requirements.</p>
+                </div>
+                <div class="order-type-card qualifies">
+                    <h4>Insurrection / Civil Disturbance</h4>
+                    <div class="legal-ref">10 U.S.C. Chapter 13</div>
+                    <p>Called to active duty to suppress insurrection or enforce federal law.</p>
+                </div>
+                <div class="order-type-card qualifies">
+                    <h4>Invasion / Rebellion Response</h4>
+                    <div class="legal-ref">10 U.S.C. § 12406</div>
+                    <p>Called to active duty in response to invasion, rebellion, or inability to execute federal law.</p>
+                </div>
+            </div>
+
+            <h4 style="color: var(--warning); margin: 1.5rem 0 1rem 0;">⚠️ Check Your Orders Authority</h4>
+            <div class="order-type-grid">
+                <div class="order-type-card qualifies">
+                    <h4>ADT under 12301(d)</h4>
+                    <div class="legal-ref">10 U.S.C. § 12301(d)</div>
+                    <p>Active Duty for Training issued under 12301(d) authority. <strong>QUALIFIES</strong> - check the legal authority cited on your orders.</p>
+                </div>
+                <div class="order-type-card does-not-qualify">
+                    <h4>ADT under 12301(b)</h4>
+                    <div class="legal-ref">10 U.S.C. § 12301(b)</div>
+                    <p>Active Duty for Training issued under 12301(b) authority. Does NOT qualify - check the legal authority cited on your orders.</p>
+                </div>
+            </div>
+
+            <h4 style="color: var(--danger); margin: 1.5rem 0 1rem 0;">✗ Non-Qualifying Orders</h4>
+            <div class="order-type-grid">
+                <div class="order-type-card does-not-qualify">
+                    <h4>Annual Training (AT)</h4>
+                    <div class="legal-ref">10 U.S.C. § 12301(b)</div>
+                    <p>Required annual training duty. Does not count toward early retirement.</p>
+                </div>
+                <div class="order-type-card does-not-qualify">
+                    <h4>Inactive Duty Training (IDT)</h4>
+                    <div class="legal-ref">N/A</div>
+                    <p>Regular drill weekends and unit training assemblies. Does not count toward early retirement.</p>
+                </div>
+                <div class="order-type-card does-not-qualify">
+                    <h4>Active Guard Reserve (AGR)</h4>
+                    <div class="legal-ref">10 U.S.C. § 12310</div>
+                    <p>Full-time support duty. Specifically excluded from qualifying service.</p>
+                </div>
+                <div class="order-type-card does-not-qualify">
+                    <h4>Funeral Honors Duty</h4>
+                    <div class="legal-ref">10 U.S.C. § 12503</div>
+                    <p>Duty to provide military funeral honors. Does not count toward early retirement.</p>
+                </div>
+                <div class="order-type-card does-not-qualify">
+                    <h4>Military Schools / PME</h4>
+                    <div class="legal-ref">10 U.S.C. § 12301(b)</div>
+                    <p>Professional Military Education and training courses. Does not count toward early retirement.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <p>This calculator is for estimation purposes only. For official determinations, contact your
+        <a href="https://www.hrc.army.mil/content/Gray%20Area%20Retirements%20Branch" target="_blank" rel="noopener noreferrer">Personnel Office</a> or review your
+        <a href="https://www.dfas.mil" target="_blank" rel="noopener noreferrer">DFAS</a> records.</p>
+        <p style="margin-top: 0.5rem;">Based on 2008 NDAA (P.L. 110-181) and subsequent amendments</p>
+        <p style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <a href="index.html">Privacy Policy</a> |
+            <a href="index.html">Terms of Use</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray);">
+            This site is not affiliated with the Department of Defense, DFAS, or any government agency.
+        </p>
+    </footer>
+
+    <script>
+        // Order definitions with qualifying status
+        const orderTypes = {
+            // Qualifying orders - per 10 U.S.C. § 12731(f)(2)
+            'mob-involuntary': { name: 'Involuntary Mobilization', qualifies: true, ref: '10 U.S.C. § 12302' },
+            'mob-partial': { name: 'Partial Mobilization', qualifies: true, ref: '10 U.S.C. § 12302' },
+            'contingency': { name: 'Contingency Operations', qualifies: true, ref: '10 U.S.C. § 12304' },
+            'contingency-12304b': { name: 'Preplanned Mission Support (12304b)', qualifies: true, ref: '10 U.S.C. § 12304b', minDate: '2011-01-01' },
+            'national-emergency': { name: 'National Emergency', qualifies: true, ref: '10 U.S.C. § 12301(a)' },
+            'homeland-defense': { name: 'Homeland Defense / DSCA', qualifies: true, ref: '32 U.S.C. § 502(f)' },
+            'insurrection': { name: 'Insurrection / Civil Disturbance', qualifies: true, ref: '10 U.S.C. Chapter 13' },
+            'recall-retired': { name: 'Recall of Retired Members', qualifies: true, ref: '10 U.S.C. § 688' },
+            'full-mob': { name: 'Full Mobilization', qualifies: true, ref: '10 U.S.C. § 12301(a)' },
+            'stop-loss': { name: 'Stop Loss / Involuntary Retention', qualifies: true, ref: '10 U.S.C. § 12305' },
+            'conus-response': { name: 'CONUS Disaster/Emergency Response', qualifies: true, ref: '10 U.S.C. § 12304a' },
+            'voluntary-12301d': { name: 'Voluntary Active Duty (ADOS/ADSW)', qualifies: true, ref: '10 U.S.C. § 12301(d)' },
+            'medical-12301h': { name: 'Medical Care / Treatment Orders', qualifies: true, ref: '10 U.S.C. § 12301(h)' },
+            'invasion-12406': { name: 'Invasion / Rebellion Response', qualifies: true, ref: '10 U.S.C. § 12406' },
+            'unit-org-12301': { name: 'Unit Organization (Full-Time Support)', qualifies: true, ref: '10 U.S.C. § 12301(d)' },
+            // ADT - depends on authority (check your orders!)
+            'adt-12301d': { name: 'ADT under 12301(d)', qualifies: true, ref: '10 U.S.C. § 12301(d)' },
+            'adt-12301b': { name: 'ADT under 12301(b)', qualifies: false, ref: '10 U.S.C. § 12301(b)' },
+            // Non-qualifying orders
+            'at': { name: 'Annual Training (AT)', qualifies: false, ref: '10 U.S.C. § 12301(b)' },
+            'idt': { name: 'Inactive Duty Training (IDT/Drills)', qualifies: false, ref: 'N/A' },
+            'agr': { name: 'Active Guard Reserve (AGR)', qualifies: false, ref: '10 U.S.C. § 12310' },
+            'funeral-honors': { name: 'Funeral Honors Duty', qualifies: false, ref: '10 U.S.C. § 12503' },
+            'muta': { name: 'Multiple Unit Training Assembly', qualifies: false, ref: 'N/A' },
+            'school': { name: 'Military Schools / PME', qualifies: false, ref: '10 U.S.C. § 12301(b)' }
+        };
+
+        // Stored orders
+        let orders = [];
+
+        // NDAA qualifying date (January 28, 2008)
+        const NDAA_START_DATE = new Date('2008-01-28');
+
+        // Calculate days between two dates
+        function calculateDays(startDate, endDate) {
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            const diffTime = Math.abs(end - start);
+            return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // Include both start and end dates
+        }
+
+        // Get fiscal year for a date
+        function getFiscalYear(date) {
+            const d = new Date(date);
+            const month = d.getMonth();
+            const year = d.getFullYear();
+            // Fiscal year starts October 1
+            return month >= 9 ? year + 1 : year;
+        }
+
+        // Check if dates span fiscal years
+        function spansFiscalYears(startDate, endDate) {
+            return getFiscalYear(startDate) !== getFiscalYear(endDate);
+        }
+
+        // Update fiscal year note visibility
+        function updateFiscalYearNote() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const note = document.getElementById('fiscalYearNote');
+
+            if (startDate && endDate && spansFiscalYears(startDate, endDate)) {
+                note.style.display = 'block';
+            } else {
+                note.style.display = 'none';
+            }
+        }
+
+        // Auto-calculate days when dates change
+        function updateDaysCalculation() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const manualDays = document.getElementById('manualDays');
+
+            if (startDate && endDate && !manualDays.value) {
+                manualDays.placeholder = calculateDays(startDate, endDate) + ' days';
+            }
+
+            updateFiscalYearNote();
+        }
+
+        // Add order to the list
+        function addOrder() {
+            const orderType = document.getElementById('orderType').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const manualDays = document.getElementById('manualDays').value;
+
+            if (!startDate || !endDate) {
+                alert('Please enter both start and end dates.');
+                return;
+            }
+
+            if (new Date(startDate) > new Date(endDate)) {
+                alert('Start date must be before end date.');
+                return;
+            }
+
+            const days = manualDays ? parseInt(manualDays) : calculateDays(startDate, endDate);
+            const orderInfo = orderTypes[orderType];
+
+            // Check if service is after NDAA date
+            const serviceStart = new Date(startDate);
+            let qualifiesForNDAA = orderInfo.qualifies && serviceStart >= NDAA_START_DATE;
+
+            // Check for 12304b minimum date
+            if (orderType === 'contingency-12304b' && serviceStart < new Date('2011-01-01')) {
+                qualifiesForNDAA = false;
+            }
+
+            const order = {
+                id: Date.now(),
+                type: orderType,
+                typeName: orderInfo.name,
+                ref: orderInfo.ref,
+                startDate: startDate,
+                endDate: endDate,
+                days: days,
+                qualifies: qualifiesForNDAA,
+                reason: !orderInfo.qualifies ? 'Order type does not qualify' :
+                        serviceStart < NDAA_START_DATE ? 'Service before Jan 28, 2008' :
+                        (orderType === 'contingency-12304b' && serviceStart < new Date('2011-01-01')) ? '12304b orders qualify from 2011 onward' :
+                        null
+            };
+
+            orders.push(order);
+            renderOrders();
+            clearInputs();
+        }
+
+        // Remove order from list
+        function removeOrder(id) {
+            orders = orders.filter(o => o.id !== id);
+            renderOrders();
+        }
+
+        // Clear input fields
+        function clearInputs() {
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            document.getElementById('manualDays').value = '';
+            document.getElementById('manualDays').placeholder = 'Auto';
+            document.getElementById('fiscalYearNote').style.display = 'none';
+        }
+
+        // Render orders list
+        function renderOrders() {
+            const container = document.getElementById('ordersList');
+
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        <p>No orders added yet.<br>Add your qualifying active duty periods above.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = orders.map(order => `
+                <div class="order-item ${order.qualifies ? 'qualifying' : 'non-qualifying'}">
+                    <div class="order-details">
+                        <div class="order-type">${order.typeName}</div>
+                        <div class="order-dates">${formatDate(order.startDate)} - ${formatDate(order.endDate)}</div>
+                        <div class="order-days">${order.days} days ${order.reason ? `(${order.reason})` : ''}</div>
+                    </div>
+                    <div class="order-status">
+                        <span class="status-badge ${order.qualifies ? 'qualifying' : 'non-qualifying'}">
+                            ${order.qualifies ? 'Qualifies' : 'Does Not Qualify'}
+                        </span>
+                        <button class="btn btn-danger" style="margin-top: 0.5rem; display: block;" onclick="removeOrder(${order.id})">Remove</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Format date for display
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        // Calculate reduction with fiscal year rules
+        function calculateReduction() {
+            if (orders.length === 0) {
+                alert('Please add at least one order to calculate your eligibility.');
+                return;
+            }
+
+            const qualifyingOrders = orders.filter(o => o.qualifies);
+            const nonQualifyingOrders = orders.filter(o => !o.qualifies);
+
+            // Group qualifying days by fiscal year
+            const daysByFY = {};
+            qualifyingOrders.forEach(order => {
+                const fy = getFiscalYear(order.startDate);
+                if (!daysByFY[fy]) daysByFY[fy] = 0;
+                daysByFY[fy] += order.days;
+            });
+
+            // Sort fiscal years
+            const fiscalYears = Object.keys(daysByFY).map(Number).sort((a, b) => a - b);
+
+            // Calculate 90-day periods respecting fiscal year rules
+            let totalPeriods = 0;
+            let carryOverDays = 0;
+            let previousFY = null;
+
+            fiscalYears.forEach(fy => {
+                let daysThisFY = daysByFY[fy];
+
+                // FY2015+ allows carry-over from consecutive fiscal years only
+                if (fy >= 2015 && previousFY !== null && previousFY === fy - 1) {
+                    daysThisFY += carryOverDays;
+                }
+                // Pre-FY2015: no carry-over allowed (days must be within same FY)
+                // Also reset if fiscal years are not consecutive
+                else if (fy >= 2015 && previousFY !== null && previousFY !== fy - 1) {
+                    // Non-consecutive years - count periods from leftover days before resetting
+                    totalPeriods += Math.floor(carryOverDays / 90);
+                }
+
+                // Count complete 90-day periods
+                const periodsThisFY = Math.floor(daysThisFY / 90);
+                totalPeriods += periodsThisFY;
+
+                // Calculate carry-over for next FY (only for FY2015+)
+                if (fy >= 2015) {
+                    carryOverDays = daysThisFY % 90;
+                } else {
+                    carryOverDays = 0; // Pre-FY2015 days don't carry over
+                }
+
+                previousFY = fy;
+            });
+
+            // Track leftover days that didn't form complete 90-day periods
+            // Also track days lost due to pre-FY2015 rules or non-consecutive FYs
+            let lostDaysPreFY2015 = 0;
+            let lostDaysNonConsecutive = 0;
+
+            // Recalculate to track lost days
+            let tempCarryOver = 0;
+            let tempPrevFY = null;
+            fiscalYears.forEach(fy => {
+                let daysThisFY = daysByFY[fy];
+
+                if (fy >= 2015 && tempPrevFY !== null && tempPrevFY === fy - 1) {
+                    daysThisFY += tempCarryOver;
+                } else if (fy < 2015 && tempCarryOver > 0) {
+                    lostDaysPreFY2015 += tempCarryOver % 90;
+                } else if (fy >= 2015 && tempPrevFY !== null && tempPrevFY !== fy - 1 && tempCarryOver > 0) {
+                    lostDaysNonConsecutive += tempCarryOver % 90;
+                }
+
+                if (fy >= 2015) {
+                    tempCarryOver = daysThisFY % 90;
+                } else {
+                    lostDaysPreFY2015 += daysThisFY % 90;
+                    tempCarryOver = 0;
+                }
+                tempPrevFY = fy;
+            });
+
+            const finalLeftoverDays = tempCarryOver; // Days remaining that could count with future service
+            const totalLostDays = lostDaysPreFY2015 + lostDaysNonConsecutive;
+
+            const totalQualifyingDays = qualifyingOrders.reduce((sum, o) => sum + o.days, 0);
+            const totalNonQualifyingDays = nonQualifyingOrders.reduce((sum, o) => sum + o.days, 0);
+
+            const periods = totalPeriods;
+            const monthsReduced = periods * 3;
+
+            // Cap at 120 months (10 years) reduction
+            const cappedMonthsReduced = Math.min(monthsReduced, 120);
+            const yearsReduced = Math.floor(cappedMonthsReduced / 12);
+            const remainingMonths = cappedMonthsReduced % 12;
+
+            // Calculate new retirement age
+            const newAgeMonths = 60 * 12 - cappedMonthsReduced;
+            const newAgeYears = Math.floor(newAgeMonths / 12);
+            const newAgeRemainderMonths = newAgeMonths % 12;
+
+            // Update display
+            document.getElementById('resultsSection').classList.add('active');
+
+            if (newAgeRemainderMonths > 0) {
+                document.getElementById('newAge').textContent = `${newAgeYears} yrs ${newAgeRemainderMonths} mo`;
+            } else {
+                document.getElementById('newAge').textContent = newAgeYears;
+            }
+
+            if (cappedMonthsReduced > 0) {
+                document.getElementById('reductionAmount').textContent =
+                    `${cappedMonthsReduced} months (${yearsReduced} years${remainingMonths > 0 ? `, ${remainingMonths} months` : ''}) earlier than standard`;
+            } else {
+                document.getElementById('reductionAmount').textContent = 'No reduction (standard age 60)';
+            }
+
+            document.getElementById('totalQualifyingDays').textContent = totalQualifyingDays;
+            document.getElementById('totalPeriods').textContent = periods;
+            document.getElementById('monthsReduced').textContent = cappedMonthsReduced;
+            document.getElementById('leftoverDays').textContent = finalLeftoverDays + totalLostDays;
+            document.getElementById('nonQualifyingDays').textContent = totalNonQualifyingDays;
+
+            // Show leftover days explanation if applicable
+            const leftoverNote = document.getElementById('leftoverNote');
+            if (finalLeftoverDays > 0 || totalLostDays > 0) {
+                leftoverNote.style.display = 'block';
+                let explanation = '';
+                if (finalLeftoverDays > 0) {
+                    explanation += `You have ${finalLeftoverDays} qualifying days that haven't yet formed a complete 90-day period. Future qualifying service can be added to reach the next reduction.`;
+                }
+                if (lostDaysPreFY2015 > 0) {
+                    if (explanation) explanation += ' ';
+                    explanation += `${lostDaysPreFY2015} days from pre-FY2015 service couldn't carry over (days had to complete 90-day periods within the same fiscal year).`;
+                }
+                if (lostDaysNonConsecutive > 0) {
+                    if (explanation) explanation += ' ';
+                    explanation += `${lostDaysNonConsecutive} days were lost due to gaps between non-consecutive fiscal years (carry-over only works between consecutive FYs).`;
+                }
+                document.getElementById('leftoverExplanation').textContent = explanation;
+            } else {
+                leftoverNote.style.display = 'none';
+            }
+
+            // Build breakdown by fiscal year
+            const breakdownContainer = document.getElementById('qualifyingBreakdown');
+            if (qualifyingOrders.length > 0) {
+                // Build FY breakdown
+                let fyBreakdownHtml = '<div style="margin-bottom: 0.75rem; font-size: 0.85rem; color: var(--gray);">By Fiscal Year:</div>';
+
+                fiscalYears.forEach(fy => {
+                    const fyOrders = qualifyingOrders.filter(o => getFiscalYear(o.startDate) === fy);
+                    const fyRule = fy >= 2015 ? '(carry-over allowed)' : '(no carry-over)';
+                    fyBreakdownHtml += `
+                        <div class="breakdown-row" style="background: rgba(255,255,255,0.03); padding: 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+                            <span><strong>FY${fy}</strong> ${fyRule}</span>
+                            <span>${daysByFY[fy]} days</span>
+                        </div>
+                    `;
+                });
+
+                fyBreakdownHtml += '<div style="margin: 0.75rem 0; font-size: 0.85rem; color: var(--gray);">By Order Type:</div>';
+                fyBreakdownHtml += qualifyingOrders.map(order => `
+                    <div class="breakdown-row">
+                        <span>${order.typeName} <span style="color: var(--gray); font-size: 0.8rem;">(FY${getFiscalYear(order.startDate)})</span></span>
+                        <span>${order.days} days</span>
+                    </div>
+                `).join('');
+
+                breakdownContainer.innerHTML = fyBreakdownHtml;
+            } else {
+                breakdownContainer.innerHTML = `
+                    <div class="breakdown-row">
+                        <span>No qualifying orders</span>
+                        <span>0 days</span>
+                    </div>
+                `;
+            }
+
+            let totalText = `${cappedMonthsReduced} months`;
+            if (yearsReduced > 0) {
+                totalText += ` (${yearsReduced} year${yearsReduced > 1 ? 's' : ''}`;
+                if (remainingMonths > 0) {
+                    totalText += `, ${remainingMonths} month${remainingMonths > 1 ? 's' : ''}`;
+                }
+                totalText += ')';
+            }
+            document.getElementById('totalReductionText').textContent = totalText;
+
+            // Scroll to results
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Event listeners
+        document.getElementById('startDate').addEventListener('change', updateDaysCalculation);
+        document.getElementById('endDate').addEventListener('change', updateDaysCalculation);
+    </script>
+</body>
+</html>
