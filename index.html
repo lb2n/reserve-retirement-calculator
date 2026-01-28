@@ -3,11 +3,14 @@
 ================================================================================
 RESERVE RETIREMENT PAY CALCULATOR
 ================================================================================
-Version: 1.3.0
-Last Updated: January 27, 2026
+Version: 1.3.1
+Last Updated: January 28, 2026
 
 CHANGE LOG:
 -----------
+v1.3.1 (2026-01-28)
+  - Fixed white stripe appearing when scrolling (added sticky header and solid background)
+
 v1.3.0 (2026-01-27)
   - Removed anchor symbol from header
 
@@ -125,6 +128,18 @@ FILES IN THIS PROJECT:
             z-index: -2;
         }
 
+        /* Solid navy background behind header area when scrolling */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: #001a33;
+            z-index: -1;
+        }
+
         /* Fallback gradient background */
         body {
             background: linear-gradient(180deg,
@@ -140,6 +155,9 @@ FILES IN THIS PROJECT:
             padding: 1.5rem 2rem;
             border-bottom: 3px solid var(--gold);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .header-content {
