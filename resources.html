@@ -3,11 +3,22 @@
 ================================================================================
 RESERVE RETIREMENT RESOURCES
 ================================================================================
-Version: 1.1.0
-Last Updated: January 27, 2026
+Version: 1.3.1
+Last Updated: January 28, 2026
 
 CHANGE LOG:
 -----------
+v1.3.1 (2026-01-28)
+  - Fixed broken TRICARE link (updated to /Plans/Eligibility)
+  - Fixed broken National Guard Benefits link (updated to main site)
+  - Fixed Marine Corps link (manpower.usmc.mil requires CAC, updated to marforres.marines.mil)
+
+v1.3.0 (2026-01-28)
+  - Removed anchor symbol from header
+
+v1.2.0 (2026-01-27)
+  - Added About page link to navigation
+
 v1.1.0 (2026-01-27)
   - Added Feedback link to navigation (Google Forms)
 
@@ -442,13 +453,13 @@ FILES IN THIS PROJECT:
             <li><a href="index.html">Retirement Pay Calculator</a></li>
             <li><a href="early-retirement-calculator.html">Early Retirement Eligibility</a></li>
             <li><a href="resources.html" class="active" aria-current="page">Resources</a></li>
+            <li><a href="about.html">About</a></li>
             <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfKhErr4BO_aHdw9AwsmWrha2Kskb7iEGDiJKxghC11zMaY7w/viewform" target="_blank" rel="noopener noreferrer">Feedback</a></li>
         </ul>
     </nav>
 
     <header class="header" role="banner">
         <div class="header-content">
-            <div class="logo anchor-icon"></div>
             <div class="header-text">
                 <h1>Reserve Retirement Resources</h1>
                 <p>Official Links, Legislation & Reference Materials</p>
@@ -600,8 +611,8 @@ FILES IN THIS PROJECT:
 
                 <div class="resource-card">
                     <span class="tag official">Official</span>
-                    <h3><a href="https://www.tricare.mil/Plans/Eligibility/Retirees" target="_blank" rel="noopener noreferrer">TRICARE Retiree Eligibility</a></h3>
-                    <p>Healthcare eligibility information for military retirees, including gray area and retired reserve members.</p>
+                    <h3><a href="https://www.tricare.mil/Plans/Eligibility" target="_blank" rel="noopener noreferrer">TRICARE Eligibility</a></h3>
+                    <p>Healthcare eligibility information for military members and retirees, including gray area and retired reserve members.</p>
                     <p class="source">TRICARE</p>
                 </div>
             </div>
@@ -634,9 +645,9 @@ FILES IN THIS PROJECT:
 
                 <div class="resource-card">
                     <span class="tag">Marine Corps</span>
-                    <h3><a href="https://www.manpower.usmc.mil/webcenter/portal/MMRP_Portal" target="_blank" rel="noopener noreferrer">Marine Corps Reserve Manpower</a></h3>
-                    <p>Marine Corps Reserve retirement and personnel management information.</p>
-                    <p class="source">Marine Corps Manpower & Reserve Affairs</p>
+                    <h3><a href="https://www.marforres.marines.mil/" target="_blank" rel="noopener noreferrer">Marine Corps Forces Reserve</a></h3>
+                    <p>Official Marine Corps Forces Reserve website with information for Marine reservists.</p>
+                    <p class="source">U.S. Marine Corps</p>
                 </div>
 
                 <div class="resource-card">
@@ -648,8 +659,8 @@ FILES IN THIS PROJECT:
 
                 <div class="resource-card">
                     <span class="tag">National Guard</span>
-                    <h3><a href="https://www.nationalguard.mil/Resources/Benefits/" target="_blank" rel="noopener noreferrer">National Guard Benefits</a></h3>
-                    <p>Benefits information for Army National Guard and Air National Guard members including retirement.</p>
+                    <h3><a href="https://www.nationalguard.mil/" target="_blank" rel="noopener noreferrer">National Guard Official Site</a></h3>
+                    <p>Official website for Army National Guard and Air National Guard members with news, resources, and information.</p>
                     <p class="source">National Guard Bureau</p>
                 </div>
             </div>
