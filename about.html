@@ -3,11 +3,14 @@
 ================================================================================
 ABOUT PAGE
 ================================================================================
-Version: 1.1.0
+Version: 1.1.1
 Last Updated: January 28, 2026
 
 CHANGE LOG:
 -----------
+v1.1.1 (2026-01-28)
+  - Fixed Submit Feedback button contrast (text now dark navy on gold background)
+
 v1.1.0 (2026-01-28)
   - Removed anchor symbol from header
 
@@ -273,10 +276,11 @@ FILES IN THIS PROJECT:
             font-size: 0.95rem;
         }
 
-        .btn {
+        .btn,
+        .content-card .btn {
             display: inline-block;
             background: var(--gold);
-            color: var(--navy-dark);
+            color: var(--navy-dark) !important;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
             text-decoration: none;
@@ -285,8 +289,10 @@ FILES IN THIS PROJECT:
             margin-top: 1rem;
         }
 
-        .btn:hover {
+        .btn:hover,
+        .content-card .btn:hover {
             background: var(--gold-light);
+            color: var(--navy-dark) !important;
             text-decoration: none;
             transform: translateY(-2px);
         }
