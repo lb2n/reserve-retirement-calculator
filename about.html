@@ -3,11 +3,14 @@
 ================================================================================
 ABOUT PAGE
 ================================================================================
-Version: 1.1.1
-Last Updated: January 28, 2026
+Version: 1.2.0
+Last Updated: January 29, 2026
 
 CHANGE LOG:
 -----------
+v1.2.0 (2026-01-29)
+  - Added Google Analytics 4 tracking (placeholder ID)
+
 v1.1.1 (2026-01-28)
   - Fixed Submit Feedback button contrast (text now dark navy on gold background)
 
@@ -35,6 +38,15 @@ FILES IN THIS PROJECT:
     <meta name="robots" content="index, follow">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YNHTMMMQLH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YNHTMMMQLH');
+    </script>
 
     <title>About | Reserve Retirement Calculator</title>
     <style>

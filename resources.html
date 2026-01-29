@@ -3,11 +3,14 @@
 ================================================================================
 RESERVE RETIREMENT RESOURCES
 ================================================================================
-Version: 1.3.1
-Last Updated: January 28, 2026
+Version: 1.4.0
+Last Updated: January 29, 2026
 
 CHANGE LOG:
 -----------
+v1.4.0 (2026-01-29)
+  - Added Google Analytics 4 tracking (placeholder ID)
+
 v1.3.1 (2026-01-28)
   - Fixed broken TRICARE link (updated to /Plans/Eligibility)
   - Fixed broken National Guard Benefits link (updated to main site)
@@ -61,6 +64,15 @@ FILES IN THIS PROJECT:
     <meta name="twitter:title" content="Reserve Retirement Resources">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YNHTMMMQLH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YNHTMMMQLH');
+    </script>
 
     <title>Reserve Retirement Resources | Official Links & Legislation</title>
     <style>
