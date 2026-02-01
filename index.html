@@ -3,13 +3,16 @@
 ================================================================================
 RESERVE RETIREMENT PAY CALCULATOR
 ================================================================================
-Version: 1.4.0
+Version: 1.4.1
 Last Updated: January 29, 2026
 
 CHANGE LOG:
 -----------
+v1.4.1 (2026-01-29)
+  - Moved Date of Birth and Age Eligible for Pay to top of Your Information section
+
 v1.4.0 (2026-01-29)
-  - Added Google Analytics 4 tracking (placeholder ID)
+  - Added Google Analytics 4 tracking
 
 v1.3.1 (2026-01-28)
   - Fixed white stripe appearing when scrolling (added sticky header and solid background)
@@ -1137,6 +1140,72 @@ FILES IN THIS PROJECT:
                     <h2>Your Information</h2>
                 </div>
 
+                <!-- Date of Birth -->
+                <div class="form-group">
+                    <label>Date of Birth
+                        <span class="info-tooltip" tabindex="0" data-tooltip="Your date of birth is used to calculate the year you will begin receiving retirement pay based on your eligible age.">?</span>
+                    </label>
+                    <input type="date" id="dateOfBirth" value="">
+                    <p class="hint">Used to calculate when you'll start receiving pay</p>
+                </div>
+
+                <!-- Age Eligible for Pay -->
+                <div class="form-group">
+                    <label>Age Eligible for Pay
+                        <span class="info-tooltip" tabindex="0" data-tooltip="Standard eligibility is age 60. However, for each 90 days of qualifying active duty service after January 28, 2008, you can reduce your eligibility age by 3 months (minimum age 50).">?</span>
+                    </label>
+                    <select id="ageEligible">
+                        <option value="50">50 years, 0 months</option>
+                        <option value="50.25">50 years, 3 months</option>
+                        <option value="50.5">50 years, 6 months</option>
+                        <option value="50.75">50 years, 9 months</option>
+                        <option value="51">51 years, 0 months</option>
+                        <option value="51.25">51 years, 3 months</option>
+                        <option value="51.5">51 years, 6 months</option>
+                        <option value="51.75">51 years, 9 months</option>
+                        <option value="52">52 years, 0 months</option>
+                        <option value="52.25">52 years, 3 months</option>
+                        <option value="52.5">52 years, 6 months</option>
+                        <option value="52.75">52 years, 9 months</option>
+                        <option value="53">53 years, 0 months</option>
+                        <option value="53.25">53 years, 3 months</option>
+                        <option value="53.5">53 years, 6 months</option>
+                        <option value="53.75">53 years, 9 months</option>
+                        <option value="54">54 years, 0 months</option>
+                        <option value="54.25">54 years, 3 months</option>
+                        <option value="54.5">54 years, 6 months</option>
+                        <option value="54.75">54 years, 9 months</option>
+                        <option value="55">55 years, 0 months</option>
+                        <option value="55.25">55 years, 3 months</option>
+                        <option value="55.5">55 years, 6 months</option>
+                        <option value="55.75">55 years, 9 months</option>
+                        <option value="56">56 years, 0 months</option>
+                        <option value="56.25">56 years, 3 months</option>
+                        <option value="56.5">56 years, 6 months</option>
+                        <option value="56.75">56 years, 9 months</option>
+                        <option value="57">57 years, 0 months</option>
+                        <option value="57.25">57 years, 3 months</option>
+                        <option value="57.5">57 years, 6 months</option>
+                        <option value="57.75">57 years, 9 months</option>
+                        <option value="58">58 years, 0 months</option>
+                        <option value="58.25">58 years, 3 months</option>
+                        <option value="58.5">58 years, 6 months</option>
+                        <option value="58.75">58 years, 9 months</option>
+                        <option value="59">59 years, 0 months</option>
+                        <option value="59.25">59 years, 3 months</option>
+                        <option value="59.5">59 years, 6 months</option>
+                        <option value="59.75">59 years, 9 months</option>
+                        <option value="60" selected>60 years, 0 months (Standard)</option>
+                    </select>
+                    <p class="hint">Standard is 60; may be reduced for qualifying active duty after Jan 28, 2008</p>
+                    <a href="early-retirement-calculator.html" class="early-retirement-link">📋 Calculate your early retirement eligibility →</a>
+                </div>
+
+                <div class="age-display" id="payStartYearDisplay" style="display: none;">
+                    <div class="label">You will start receiving pay in</div>
+                    <div class="value" id="payStartYear">2040</div>
+                </div>
+
                 <!-- Retirement System Selection -->
                 <div class="form-group">
                     <label>Retirement System
@@ -1244,72 +1313,6 @@ FILES IN THIS PROJECT:
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Date of Birth -->
-                <div class="form-group">
-                    <label>Date of Birth
-                        <span class="info-tooltip" tabindex="0" data-tooltip="Your date of birth is used to calculate the year you will begin receiving retirement pay based on your eligible age.">?</span>
-                    </label>
-                    <input type="date" id="dateOfBirth" value="">
-                    <p class="hint">Used to calculate when you'll start receiving pay</p>
-                </div>
-
-                <!-- Age Eligible for Pay -->
-                <div class="form-group">
-                    <label>Age Eligible for Pay
-                        <span class="info-tooltip" tabindex="0" data-tooltip="Standard eligibility is age 60. However, for each 90 days of qualifying active duty service after January 28, 2008, you can reduce your eligibility age by 3 months (minimum age 50).">?</span>
-                    </label>
-                    <select id="ageEligible">
-                        <option value="50">50 years, 0 months</option>
-                        <option value="50.25">50 years, 3 months</option>
-                        <option value="50.5">50 years, 6 months</option>
-                        <option value="50.75">50 years, 9 months</option>
-                        <option value="51">51 years, 0 months</option>
-                        <option value="51.25">51 years, 3 months</option>
-                        <option value="51.5">51 years, 6 months</option>
-                        <option value="51.75">51 years, 9 months</option>
-                        <option value="52">52 years, 0 months</option>
-                        <option value="52.25">52 years, 3 months</option>
-                        <option value="52.5">52 years, 6 months</option>
-                        <option value="52.75">52 years, 9 months</option>
-                        <option value="53">53 years, 0 months</option>
-                        <option value="53.25">53 years, 3 months</option>
-                        <option value="53.5">53 years, 6 months</option>
-                        <option value="53.75">53 years, 9 months</option>
-                        <option value="54">54 years, 0 months</option>
-                        <option value="54.25">54 years, 3 months</option>
-                        <option value="54.5">54 years, 6 months</option>
-                        <option value="54.75">54 years, 9 months</option>
-                        <option value="55">55 years, 0 months</option>
-                        <option value="55.25">55 years, 3 months</option>
-                        <option value="55.5">55 years, 6 months</option>
-                        <option value="55.75">55 years, 9 months</option>
-                        <option value="56">56 years, 0 months</option>
-                        <option value="56.25">56 years, 3 months</option>
-                        <option value="56.5">56 years, 6 months</option>
-                        <option value="56.75">56 years, 9 months</option>
-                        <option value="57">57 years, 0 months</option>
-                        <option value="57.25">57 years, 3 months</option>
-                        <option value="57.5">57 years, 6 months</option>
-                        <option value="57.75">57 years, 9 months</option>
-                        <option value="58">58 years, 0 months</option>
-                        <option value="58.25">58 years, 3 months</option>
-                        <option value="58.5">58 years, 6 months</option>
-                        <option value="58.75">58 years, 9 months</option>
-                        <option value="59">59 years, 0 months</option>
-                        <option value="59.25">59 years, 3 months</option>
-                        <option value="59.5">59 years, 6 months</option>
-                        <option value="59.75">59 years, 9 months</option>
-                        <option value="60" selected>60 years, 0 months (Standard)</option>
-                    </select>
-                    <p class="hint">Standard is 60; may be reduced for qualifying active duty after Jan 28, 2008</p>
-                    <a href="early-retirement-calculator.html" class="early-retirement-link">📋 Calculate your early retirement eligibility →</a>
-                </div>
-
-                <div class="age-display" id="payStartYearDisplay" style="display: none;">
-                    <div class="label">You will start receiving pay in</div>
-                    <div class="value" id="payStartYear">2040</div>
                 </div>
 
                 <!-- Pay Table Growth (Pre-Retirement) -->
