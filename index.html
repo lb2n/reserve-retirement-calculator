@@ -3,11 +3,21 @@
 ================================================================================
 RESERVE RETIREMENT PAY CALCULATOR
 ================================================================================
-Version: 1.4.1
-Last Updated: January 29, 2026
+Version: 1.5.0
+Last Updated: February 6, 2026
 
 CHANGE LOG:
 -----------
+v1.5.0 (2026-02-06)
+  - Added break-in-service calculator for Years of Service (supports multiple service periods)
+  - Added Print Results button with timestamp
+  - Added input validation CSS for error states
+  - Added DOB placeholder guidance with required indicator
+  - Added link to Early Retirement Calculator in Age Eligible section
+
+v1.4.2 (2026-01-29)
+  - Changed "Non-Regular (Reserve/Guard)" to "Reserve/Guard (Non-Regular)" in header
+
 v1.4.1 (2026-01-29)
   - Moved Date of Birth and Age Eligible for Pay to top of Your Information section
 
@@ -404,6 +414,23 @@ FILES IN THIS PROJECT:
             outline: none;
             border-color: var(--gold);
             background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Validation error styles */
+        input.error, select.error {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
         }
 
         select option {
@@ -1118,7 +1145,7 @@ FILES IN THIS PROJECT:
         <div class="header-content">
             <div class="header-text">
                 <h1>Reserve Retirement Pay Calculator</h1>
-                <p>Estimate Your Non-Regular (Reserve/Guard) Retired Pay</p>
+                <p>Estimate Your Reserve/Guard (Non-Regular) Retired Pay</p>
             </div>
         </div>
     </header>
@@ -1142,18 +1169,20 @@ FILES IN THIS PROJECT:
 
                 <!-- Date of Birth -->
                 <div class="form-group">
-                    <label>Date of Birth
+                    <label>Date of Birth <span style="color: #ef4444;">*</span>
                         <span class="info-tooltip" tabindex="0" data-tooltip="Your date of birth is used to calculate the year you will begin receiving retirement pay based on your eligible age.">?</span>
                     </label>
-                    <input type="date" id="dateOfBirth" value="">
-                    <p class="hint">Used to calculate when you'll start receiving pay</p>
+                    <input type="date" id="dateOfBirth" value="" required aria-required="true">
+                    <p class="hint">Enter your birth date to calculate when you'll start receiving pay</p>
+                    <p class="error-message" id="dobError">Please enter your date of birth</p>
                 </div>
 
                 <!-- Age Eligible for Pay -->
                 <div class="form-group">
                     <label>Age Eligible for Pay
-                        <span class="info-tooltip" tabindex="0" data-tooltip="Standard eligibility is age 60. However, for each 90 days of qualifying active duty service after January 28, 2008, you can reduce your eligibility age by 3 months (minimum age 50).">?</span>
+                        <span class="info-tooltip" tabindex="0" data-tooltip="Standard eligibility is age 60. However, for each 90 days of qualifying active duty service after January 28, 2008, you can reduce your eligibility age by 3 months (minimum age 50). Use the Early Retirement Calculator to determine your eligible age.">?</span>
                     </label>
+                    <p class="hint" style="margin-bottom: 0.5rem; margin-top: 0;"><strong>Not sure?</strong> <a href="early-retirement-calculator.html" style="color: var(--gold-light);">Calculate your eligible age first →</a></p>
                     <select id="ageEligible">
                         <option value="50">50 years, 0 months</option>
                         <option value="50.25">50 years, 3 months</option>
@@ -1269,7 +1298,7 @@ FILES IN THIS PROJECT:
                 <!-- Years of Service for Pay -->
                 <div class="form-group">
                     <label>Years of Service at Time You Receive Pay
-                        <span class="info-tooltip" tabindex="0" data-tooltip="IMPORTANT: This is your total years of service when you START RECEIVING PAY (not when you stop drilling). Time in the Retired Reserve (gray area) counts! Example: If you retire from drilling at 20 years but don't receive pay until age 60 (15 years later), enter 35 years.">?</span>
+                        <span class="info-tooltip" tabindex="0" data-tooltip="This is your TOTAL time in service when you START RECEIVING PAY - not when you stop drilling. Time waiting for pay (gray area) counts toward your Years of Service and moves you up the pay table for higher pay.">?</span>
                     </label>
                     <select id="yearsOfService">
                         <option value="2">Less than 2 years</option>
@@ -1295,21 +1324,53 @@ FILES IN THIS PROJECT:
                         <option value="38">38 years</option>
                         <option value="40">40+ years</option>
                     </select>
-                    <p class="hint">Include time in the Retired Reserve ("gray area") waiting for pay. This moves you up the pay table.</p>
+
+                    <div class="highlight-box" style="margin-top: 0.75rem; padding: 0.75rem; background: rgba(201, 162, 39, 0.1); border: 1px solid var(--gold); border-radius: 6px;">
+                        <p style="margin: 0; font-size: 0.85rem; color: var(--gray-light);">
+                            <strong style="color: var(--gold);">💡 Why this matters:</strong>
+                            Years of Service determines your position on the pay table. More years = higher pay at the same rank.
+                            The "gray area" time while waiting for retirement pay <em>still counts</em> toward your Years of Service.
+                        </p>
+                    </div>
+
                     <div class="yos-calculator">
                         <button type="button" class="yos-calc-toggle" onclick="toggleYOSCalculator()">📊 Help me calculate my years of service</button>
                         <div id="yosCalcSection" class="yos-calc-section" style="display: none;">
-                            <div class="yos-calc-row">
-                                <label>Year you entered service:</label>
-                                <input type="number" id="yosEntryYear" placeholder="e.g., 2005" min="1950" max="2030">
+                            <p style="font-size: 0.85rem; color: var(--gray); margin-bottom: 1rem;">
+                                Enter your service periods below. If you had a break in service, click "Add another service period" to enter multiple periods.
+                            </p>
+
+                            <div id="servicePeriods">
+                                <div class="service-period" data-period="1">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                        <strong style="color: var(--gold-light);">Service Period 1</strong>
+                                    </div>
+                                    <div class="yos-calc-row">
+                                        <label>Start Year:</label>
+                                        <input type="number" class="period-start" placeholder="e.g., 2005" min="1950" max="2030" onchange="calculateTotalYOS()">
+                                    </div>
+                                    <div class="yos-calc-row">
+                                        <label>End Year (or current):</label>
+                                        <input type="number" class="period-end" placeholder="e.g., 2025" min="1950" max="2070" onchange="calculateTotalYOS()">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="yos-calc-row">
+
+                            <button type="button" onclick="addServicePeriod()" style="margin-top: 0.75rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border: 1px dashed var(--gold); border-radius: 6px; color: var(--gold-light); cursor: pointer; font-size: 0.85rem;">
+                                + Add another service period (for breaks in service)
+                            </button>
+
+                            <div class="yos-calc-row" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                                 <label>Year you'll start receiving pay:</label>
-                                <span id="yosPayYear" class="yos-calc-value">Enter DOB below</span>
+                                <span id="yosPayYear" class="yos-calc-value" style="color: var(--gold);">Enter DOB above</span>
                             </div>
-                            <div class="yos-calc-result" id="yosCalcResult" style="display: none;">
-                                <strong>Estimated Years of Service:</strong> <span id="yosCalcTotal">0</span> years
-                                <p class="yos-calc-explanation" id="yosCalcExplanation"></p>
+
+                            <div class="yos-calc-result" id="yosCalcResult" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.15); border: 1px solid var(--success); border-radius: 6px;">
+                                <strong style="color: var(--success);">Total Years of Service:</strong> <span id="yosCalcTotal" style="font-size: 1.2rem; color: var(--white);">0</span> years
+                                <p class="yos-calc-explanation" id="yosCalcExplanation" style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--gray);"></p>
+                                <button type="button" onclick="applyYOSCalculation()" style="margin-top: 0.75rem; padding: 0.5rem 1rem; background: var(--success); border: none; border-radius: 6px; color: white; cursor: pointer; font-weight: 500;">
+                                    Apply this to my calculation
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -1501,6 +1562,12 @@ FILES IN THIS PROJECT:
                         <li id="sbpPaidUpNote" class="hidden">SBP becomes "paid up" after 30 years of premiums AND reaching age 70</li>
                     </ul>
                 </div>
+
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <button type="button" onclick="printResults()" class="calculate-btn" style="width: auto; padding: 0.75rem 2rem; font-size: 1rem;">
+                        🖨️ Print Results
+                    </button>
+                </div>
             </div>
         </div>
     </main>
@@ -1657,52 +1724,147 @@ FILES IN THIS PROJECT:
         function toggleYOSCalculator() {
             const section = document.getElementById('yosCalcSection');
             section.style.display = section.style.display === 'none' ? 'block' : 'none';
-            updateYOSCalculator();
+            calculateTotalYOS();
         }
 
+        // Legacy function - now delegates to calculateTotalYOS
         function updateYOSCalculator() {
+            calculateTotalYOS();
+        }
+
+        // Track the number of service periods for the break-in-service calculator
+        let servicePeriodCount = 1;
+
+        // Add another service period for break-in-service scenarios
+        function addServicePeriod() {
+            servicePeriodCount++;
+            const container = document.getElementById('servicePeriods');
+            const newPeriod = document.createElement('div');
+            newPeriod.className = 'service-period';
+            newPeriod.setAttribute('data-period', servicePeriodCount);
+            newPeriod.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed rgba(255,255,255,0.2);">
+                    <strong style="color: var(--gold-light);">Service Period ${servicePeriodCount}</strong>
+                    <button type="button" onclick="removeServicePeriod(this)" style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 4px; color: #fca5a5; padding: 0.25rem 0.5rem; cursor: pointer; font-size: 0.75rem;">Remove</button>
+                </div>
+                <div class="yos-calc-row">
+                    <label>Start Year:</label>
+                    <input type="number" class="period-start" placeholder="e.g., 2010" min="1950" max="2030" onchange="calculateTotalYOS()">
+                </div>
+                <div class="yos-calc-row">
+                    <label>End Year (or current):</label>
+                    <input type="number" class="period-end" placeholder="e.g., 2020" min="1950" max="2070" onchange="calculateTotalYOS()">
+                </div>
+            `;
+            container.appendChild(newPeriod);
+        }
+
+        // Remove a service period
+        function removeServicePeriod(button) {
+            const period = button.closest('.service-period');
+            period.remove();
+            // Renumber remaining periods
+            const periods = document.querySelectorAll('.service-period');
+            periods.forEach((p, index) => {
+                p.setAttribute('data-period', index + 1);
+                p.querySelector('strong').textContent = `Service Period ${index + 1}`;
+            });
+            servicePeriodCount = periods.length;
+            calculateTotalYOS();
+        }
+
+        // Calculate total YOS from all service periods
+        function calculateTotalYOS() {
             const dob = document.getElementById('dateOfBirth').value;
             const ageEligible = parseFloat(document.getElementById('ageEligible').value);
-            const entryYear = parseInt(document.getElementById('yosEntryYear').value);
             const payYearSpan = document.getElementById('yosPayYear');
             const resultDiv = document.getElementById('yosCalcResult');
 
+            // Update pay year display
             if (dob) {
                 const payStartDate = getPayStartDate(dob, ageEligible);
                 const payYear = payStartDate.getFullYear();
                 payYearSpan.textContent = payYear;
-
-                if (entryYear && entryYear > 1950 && entryYear <= new Date().getFullYear()) {
-                    const totalYOS = payYear - entryYear;
-                    document.getElementById('yosCalcTotal').textContent = totalYOS;
-
-                    // Find the gray area time
-                    const dobDate = new Date(dob);
-                    const ageAtEntry = entryYear - dobDate.getFullYear();
-                    const retireFromDrillingAge = Math.min(ageAtEntry + 20, 60); // Assume 20-year career or until 60
-                    const grayAreaYears = Math.max(0, ageEligible - retireFromDrillingAge);
-
-                    let explanation = `From ${entryYear} to ${payYear} = ${totalYOS} years total.`;
-                    if (grayAreaYears > 0) {
-                        explanation += ` This likely includes ~${Math.round(grayAreaYears)} years in the Retired Reserve (gray area).`;
-                    }
-
-                    document.getElementById('yosCalcExplanation').textContent = explanation;
-                    resultDiv.style.display = 'block';
-
-                    // Auto-select the closest YOS option
-                    const yosSelect = document.getElementById('yearsOfService');
-                    const options = Array.from(yosSelect.options).map(o => parseInt(o.value));
-                    const closest = options.reduce((prev, curr) =>
-                        Math.abs(curr - totalYOS) < Math.abs(prev - totalYOS) ? curr : prev
-                    );
-                    yosSelect.value = closest;
-                } else {
-                    resultDiv.style.display = 'none';
-                }
             } else {
-                payYearSpan.textContent = 'Enter DOB below';
+                payYearSpan.textContent = 'Enter DOB above';
                 resultDiv.style.display = 'none';
+                return;
+            }
+
+            // Calculate total from all periods
+            const periods = document.querySelectorAll('.service-period');
+            let totalYears = 0;
+            let allPeriodsValid = true;
+            let periodDetails = [];
+            let earliestStart = null;
+            let latestEnd = null;
+
+            periods.forEach((period, index) => {
+                const startInput = period.querySelector('.period-start');
+                const endInput = period.querySelector('.period-end');
+                const startYear = parseInt(startInput.value);
+                const endYear = parseInt(endInput.value);
+
+                if (startYear && endYear && startYear > 1950 && endYear >= startYear) {
+                    const years = endYear - startYear;
+                    totalYears += years;
+                    periodDetails.push(`Period ${index + 1}: ${startYear}-${endYear} (${years} yrs)`);
+
+                    if (!earliestStart || startYear < earliestStart) earliestStart = startYear;
+                    if (!latestEnd || endYear > latestEnd) latestEnd = endYear;
+                } else if (startInput.value || endInput.value) {
+                    allPeriodsValid = false;
+                }
+            });
+
+            if (totalYears > 0 && dob) {
+                // Add gray area time (from last service end to pay start)
+                const payStartDate = getPayStartDate(dob, ageEligible);
+                const payYear = payStartDate.getFullYear();
+
+                if (latestEnd && payYear > latestEnd) {
+                    const grayAreaYears = payYear - latestEnd;
+                    totalYears += grayAreaYears;
+                    periodDetails.push(`Gray area: ${latestEnd}-${payYear} (${grayAreaYears} yrs)`);
+                }
+
+                document.getElementById('yosCalcTotal').textContent = totalYears;
+
+                // Build explanation
+                let explanation = periodDetails.join(' | ');
+                if (periods.length > 1) {
+                    const totalServiceOnly = totalYears - (latestEnd && payYear > latestEnd ? payYear - latestEnd : 0);
+                    explanation = `Active service: ${totalServiceOnly} years across ${periods.length} periods. ` +
+                                  (payYear > latestEnd ? `Gray area adds ${payYear - latestEnd} years. ` : '') +
+                                  `Total at pay start: ${totalYears} years.`;
+                }
+
+                document.getElementById('yosCalcExplanation').textContent = explanation;
+                resultDiv.style.display = 'block';
+            } else {
+                resultDiv.style.display = 'none';
+            }
+        }
+
+        // Apply the calculated YOS to the main form
+        function applyYOSCalculation() {
+            const totalYears = parseInt(document.getElementById('yosCalcTotal').textContent);
+            if (totalYears > 0) {
+                const yosSelect = document.getElementById('yearsOfService');
+                // Find the closest matching option
+                const options = Array.from(yosSelect.options).map(o => parseInt(o.value));
+                const closest = options.reduce((prev, curr) =>
+                    Math.abs(curr - totalYears) < Math.abs(prev - totalYears) ? curr : prev
+                );
+                yosSelect.value = closest;
+
+                // Visual feedback
+                yosSelect.style.borderColor = 'var(--success)';
+                yosSelect.style.backgroundColor = 'rgba(16, 185, 129, 0.15)';
+                setTimeout(() => {
+                    yosSelect.style.borderColor = '';
+                    yosSelect.style.backgroundColor = '';
+                }, 2000);
             }
         }
 
@@ -1735,6 +1897,44 @@ FILES IN THIS PROJECT:
                 currency: 'USD',
                 minimumFractionDigits: 2
             }).format(amount);
+        }
+
+        // Print results function
+        function printResults() {
+            // Add a timestamp to the print
+            const now = new Date();
+            const timestamp = now.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // Create a temporary element for print timestamp
+            const printInfo = document.createElement('div');
+            printInfo.id = 'printTimestamp';
+            printInfo.style.cssText = 'text-align: center; padding: 1rem; font-size: 0.85rem; color: #666; display: none;';
+            printInfo.innerHTML = `<p>Estimate generated: ${timestamp}</p><p>This is an estimate only - contact DFAS for official calculations.</p>`;
+
+            // Add to results section temporarily
+            const results = document.getElementById('resultsSection');
+            results.insertBefore(printInfo, results.firstChild);
+
+            // Show the timestamp for printing
+            const style = document.createElement('style');
+            style.id = 'printTimestampStyle';
+            style.textContent = '@media print { #printTimestamp { display: block !important; } }';
+            document.head.appendChild(style);
+
+            // Trigger print
+            window.print();
+
+            // Clean up after print dialog closes
+            setTimeout(() => {
+                printInfo.remove();
+                style.remove();
+            }, 1000);
         }
 
         function calculateRetirement() {
@@ -1923,9 +2123,8 @@ FILES IN THIS PROJECT:
         });
         document.getElementById('ageEligible').addEventListener('change', function() {
             updatePayStartYear();
-            updateYOSCalculator();
+            calculateTotalYOS();
         });
-        document.getElementById('yosEntryYear').addEventListener('input', updateYOSCalculator);
         document.getElementById('includeSBP').addEventListener('change', toggleSBPOptions);
         document.getElementById('sbpFull').addEventListener('change', togglePartialAmount);
         document.getElementById('sbpPartial').addEventListener('change', togglePartialAmount);
