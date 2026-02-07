@@ -3,11 +3,17 @@
 ================================================================================
 RESERVE RETIREMENT PAY CALCULATOR
 ================================================================================
-Version: 1.5.0
-Last Updated: February 6, 2026
+Version: 1.5.1
+Last Updated: February 7, 2026
 
 CHANGE LOG:
 -----------
+v1.5.1 (2026-02-07)
+  - Fixed DFAS link readability in disclaimer (now gold color)
+  - Consolidated Age Eligible calculator button to single button above dropdown
+  - Improved print report with clean formatting and input summary header
+  - Enhanced print styles for better readability on paper
+
 v1.5.0 (2026-02-06)
   - Added break-in-service calculator for Years of Service (supports multiple service periods)
   - Added Print Results button with timestamp
@@ -238,6 +244,15 @@ FILES IN THIS PROJECT:
 
         .disclaimer strong {
             color: var(--gold);
+        }
+
+        .disclaimer a {
+            color: var(--gold-light);
+            text-decoration: underline;
+        }
+
+        .disclaimer a:hover {
+            color: var(--white);
         }
 
         .main-grid {
@@ -928,6 +943,11 @@ FILES IN THIS PROJECT:
 
         /* Print styles */
         @media print {
+            * {
+                color: black !important;
+                background: white !important;
+            }
+
             body::before,
             body::after {
                 display: none !important;
@@ -936,6 +956,7 @@ FILES IN THIS PROJECT:
             body {
                 background: white !important;
                 color: black !important;
+                font-size: 12pt !important;
             }
 
             .header {
@@ -943,10 +964,12 @@ FILES IN THIS PROJECT:
                 color: black !important;
                 border-bottom: 2px solid #003366 !important;
                 position: relative !important;
+                padding: 0.5rem 1rem !important;
             }
 
             .header-text h1,
-            .header-text p {
+            .header-text p,
+            .logo {
                 color: #003366 !important;
             }
 
@@ -961,36 +984,116 @@ FILES IN THIS PROJECT:
                 border-bottom-color: #003366 !important;
             }
 
-            .card-header h2 {
+            .card-header h2,
+            .card-header svg {
                 color: #003366 !important;
             }
 
-            .btn, .early-retirement-link, .yos-calculator {
+            /* Hide non-essential elements for print */
+            .btn, .calculate-btn, .early-retirement-link, .yos-calculator,
+            .nav-bar, .disclaimer, .info-tooltip,
+            #inputSection, .modal-overlay {
                 display: none !important;
             }
 
-            .results-card {
+            /* Show only results section */
+            .results-section {
                 display: block !important;
             }
 
-            .result-value {
+            /* Result cards - clean styling */
+            .result-card {
+                background: #f8f9fa !important;
+                border: 2px solid #003366 !important;
+                margin-bottom: 1rem !important;
+                padding: 1rem !important;
+            }
+
+            .result-card h3 {
+                color: #003366 !important;
+                font-size: 11pt !important;
+                margin-bottom: 0.25rem !important;
+            }
+
+            .result-card .amount {
+                color: #000 !important;
+                font-size: 20pt !important;
+                font-weight: bold !important;
+            }
+
+            .result-card .subtext {
+                color: #333 !important;
+                font-size: 10pt !important;
+            }
+
+            /* Breakdown section */
+            .breakdown {
+                background: white !important;
+                border: 1px solid #ccc !important;
+                padding: 0.75rem !important;
+            }
+
+            .breakdown h4 {
+                color: #003366 !important;
+                font-size: 12pt !important;
+                border-bottom: 1px solid #003366 !important;
+                padding-bottom: 0.5rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            .breakdown-row {
+                color: black !important;
+                border-bottom-color: #ddd !important;
+                font-size: 10pt !important;
+            }
+
+            .breakdown-row.total {
+                color: #003366 !important;
+                font-weight: bold !important;
+                border-top: 2px solid #003366 !important;
+            }
+
+            /* COLA projections table */
+            .cola-projections h4 {
                 color: #003366 !important;
             }
 
-            .disclaimer {
-                background: #f5f5f5 !important;
-                border-color: #ccc !important;
-                color: black !important;
+            .projection-table {
+                border: 1px solid #ccc !important;
             }
 
-            .nav-bar {
-                display: none !important;
+            .projection-table th {
+                background: #003366 !important;
+                color: white !important;
+                font-size: 10pt !important;
+            }
+
+            .projection-table td {
+                color: black !important;
+                font-size: 10pt !important;
+                border-bottom: 1px solid #ddd !important;
+            }
+
+            /* Important notes */
+            .breakdown ul li {
+                color: black !important;
+                font-size: 9pt !important;
             }
 
             .footer {
                 background: white !important;
-                color: black !important;
+                color: #666 !important;
                 border-top: 1px solid #ccc !important;
+                font-size: 9pt !important;
+            }
+
+            /* Print report header */
+            #printReportHeader {
+                display: block !important;
+                text-align: center;
+                padding: 1rem;
+                border-bottom: 2px solid #003366;
+                margin-bottom: 1rem;
             }
         }
 
@@ -1182,7 +1285,7 @@ FILES IN THIS PROJECT:
                     <label>Age Eligible for Pay
                         <span class="info-tooltip" tabindex="0" data-tooltip="Standard eligibility is age 60. However, for each 90 days of qualifying active duty service after January 28, 2008, you can reduce your eligibility age by 3 months (minimum age 50). Use the Early Retirement Calculator to determine your eligible age.">?</span>
                     </label>
-                    <p class="hint" style="margin-bottom: 0.5rem; margin-top: 0;"><strong>Not sure?</strong> <a href="early-retirement-calculator.html" style="color: var(--gold-light);">Calculate your eligible age first →</a></p>
+                    <a href="early-retirement-calculator.html" class="early-retirement-link" style="margin-bottom: 0.75rem;">📋 Not sure? Calculate your eligible age first →</a>
                     <select id="ageEligible">
                         <option value="50">50 years, 0 months</option>
                         <option value="50.25">50 years, 3 months</option>
@@ -1227,7 +1330,6 @@ FILES IN THIS PROJECT:
                         <option value="60" selected>60 years, 0 months (Standard)</option>
                     </select>
                     <p class="hint">Standard is 60; may be reduced for qualifying active duty after Jan 28, 2008</p>
-                    <a href="early-retirement-calculator.html" class="early-retirement-link">📋 Calculate your early retirement eligibility →</a>
                 </div>
 
                 <div class="age-display" id="payStartYearDisplay" style="display: none;">
@@ -1899,9 +2001,9 @@ FILES IN THIS PROJECT:
             }).format(amount);
         }
 
-        // Print results function
+        // Print results function - generates a clean print report
         function printResults() {
-            // Add a timestamp to the print
+            // Gather current values for the report
             const now = new Date();
             const timestamp = now.toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -1911,20 +2013,56 @@ FILES IN THIS PROJECT:
                 minute: '2-digit'
             });
 
-            // Create a temporary element for print timestamp
-            const printInfo = document.createElement('div');
-            printInfo.id = 'printTimestamp';
-            printInfo.style.cssText = 'text-align: center; padding: 1rem; font-size: 0.85rem; color: #666; display: none;';
-            printInfo.innerHTML = `<p>Estimate generated: ${timestamp}</p><p>This is an estimate only - contact DFAS for official calculations.</p>`;
+            const payGrade = document.getElementById('payGrade').value;
+            const yearsOfService = document.getElementById('yearsOfService').value;
+            const totalPoints = document.getElementById('totalPoints').value;
+            const systemUsed = document.getElementById('systemUsed').textContent;
+            const payStartAge = document.getElementById('payStartAge').textContent;
 
-            // Add to results section temporarily
+            // Create print report header with input summary
+            const printHeader = document.createElement('div');
+            printHeader.id = 'printReportHeader';
+            printHeader.style.cssText = 'display: none; text-align: center; padding: 1rem; margin-bottom: 1rem; border-bottom: 3px solid #003366; page-break-after: avoid;';
+            printHeader.innerHTML = `
+                <h2 style="color: #003366; margin-bottom: 0.5rem; font-size: 18pt;">Reserve Retirement Pay Estimate</h2>
+                <p style="color: #666; font-size: 10pt; margin-bottom: 1rem;">Generated: ${timestamp}</p>
+                <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; font-size: 10pt; color: #333; background: #f5f5f5; padding: 0.75rem; border-radius: 4px;">
+                    <span><strong>Pay Grade:</strong> ${payGrade}</span>
+                    <span><strong>Years of Service:</strong> ${yearsOfService}</span>
+                    <span><strong>Total Points:</strong> ${totalPoints}</span>
+                    <span><strong>System:</strong> ${systemUsed.replace(' System', '')}</span>
+                </div>
+                <p style="color: #666; font-size: 9pt; margin-top: 0.75rem; font-style: italic;">${payStartAge}</p>
+            `;
+
+            // Create footer disclaimer
+            const printFooter = document.createElement('div');
+            printFooter.id = 'printReportFooter';
+            printFooter.style.cssText = 'display: none; text-align: center; padding: 1rem; margin-top: 1rem; border-top: 1px solid #ccc; font-size: 9pt; color: #666;';
+            printFooter.innerHTML = `
+                <p><strong>DISCLAIMER:</strong> This is an estimate only. Actual retirement pay may vary.</p>
+                <p>For official calculations, contact DFAS at <strong>www.dfas.mil</strong> or your servicing personnel office.</p>
+                <p style="margin-top: 0.5rem;">Reserve Retirement Pay Calculator | Not affiliated with DoD or any government agency</p>
+            `;
+
+            // Add to results section
             const results = document.getElementById('resultsSection');
-            results.insertBefore(printInfo, results.firstChild);
+            const cardHeader = results.querySelector('.card-header');
+            results.insertBefore(printHeader, cardHeader);
+            results.appendChild(printFooter);
 
-            // Show the timestamp for printing
+            // Add print-specific styles
             const style = document.createElement('style');
-            style.id = 'printTimestampStyle';
-            style.textContent = '@media print { #printTimestamp { display: block !important; } }';
+            style.id = 'printReportStyle';
+            style.textContent = `
+                @media print {
+                    #printReportHeader, #printReportFooter { display: block !important; }
+                    .card-header { display: none !important; }
+                    #resultsSection { border: none !important; }
+                    .result-card { page-break-inside: avoid; }
+                    .cola-projections { page-break-before: auto; }
+                }
+            `;
             document.head.appendChild(style);
 
             // Trigger print
@@ -1932,7 +2070,8 @@ FILES IN THIS PROJECT:
 
             // Clean up after print dialog closes
             setTimeout(() => {
-                printInfo.remove();
+                printHeader.remove();
+                printFooter.remove();
                 style.remove();
             }, 1000);
         }
