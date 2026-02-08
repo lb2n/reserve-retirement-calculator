@@ -3,11 +3,14 @@
 ================================================================================
 RESERVE RETIREMENT PAY CALCULATOR
 ================================================================================
-Version: 1.5.1
-Last Updated: February 7, 2026
+Version: 1.5.2
+Last Updated: February 8, 2026
 
 CHANGE LOG:
 -----------
+v1.5.2 (2026-02-08)
+  - Updated enlisted pay grades to include all four branches (Navy/Army/AF/USMC)
+
 v1.5.1 (2026-02-07)
   - Fixed DFAS link readability in disclaimer (now gold color)
   - Consolidated Age Eligible calculator button to single button above dropdown
@@ -1364,16 +1367,16 @@ FILES IN THIS PROJECT:
                         <span class="info-tooltip" tabindex="0" data-tooltip="Select your highest pay grade (rank) at retirement. Your retirement pay is calculated based on this grade and your years of service. Reserve retirement uses the pay rate in effect when you start receiving pay.">?</span>
                     </label>
                     <select id="payGrade">
-                        <optgroup label="Enlisted">
-                            <option value="E-1">E-1 - Seaman Recruit / Private</option>
-                            <option value="E-2">E-2 - Seaman Apprentice / Private</option>
-                            <option value="E-3">E-3 - Seaman / Private First Class</option>
-                            <option value="E-4">E-4 - Petty Officer 3rd Class / Specialist</option>
-                            <option value="E-5">E-5 - Petty Officer 2nd Class / Sergeant</option>
-                            <option value="E-6" selected>E-6 - Petty Officer 1st Class / Staff Sergeant</option>
-                            <option value="E-7">E-7 - Chief Petty Officer / Sergeant First Class</option>
-                            <option value="E-8">E-8 - Senior Chief Petty Officer / Master Sergeant</option>
-                            <option value="E-9">E-9 - Master Chief Petty Officer / Sergeant Major</option>
+                        <optgroup label="Enlisted (Navy / Army / AF / USMC)">
+                            <option value="E-1">E-1 - SR / PVT / AB / Pvt</option>
+                            <option value="E-2">E-2 - SA / PV2 / Amn / PFC</option>
+                            <option value="E-3">E-3 - SN / PFC / A1C / LCpl</option>
+                            <option value="E-4">E-4 - PO3 / SPC / SrA / Cpl</option>
+                            <option value="E-5">E-5 - PO2 / SGT / SSgt / Sgt</option>
+                            <option value="E-6" selected>E-6 - PO1 / SSG / TSgt / SSgt</option>
+                            <option value="E-7">E-7 - CPO / SFC / MSgt / GySgt</option>
+                            <option value="E-8">E-8 - SCPO / MSG / SMSgt / MSgt</option>
+                            <option value="E-9">E-9 - MCPO / SGM / CMSgt / MGySgt</option>
                         </optgroup>
                         <optgroup label="Warrant Officers">
                             <option value="W-1">W-1 - Warrant Officer 1</option>
