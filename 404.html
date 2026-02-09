@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--
+================================================================================
+RESERVE RETIREMENT - 404 ERROR PAGE
+================================================================================
+Version: 1.0.0
+Last Updated: February 8, 2026
+================================================================================
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <title>Page Not Found | ReserveRetirement.org</title>
+    <style>
+        :root {
+            --navy-primary: #003366;
+            --navy-dark: #001a33;
+            --gold: #c9a227;
+            --gold-light: #d4b85a;
+            --white: #ffffff;
+            --gray: #b8c0cc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #001a33 0%, #003366 50%, #004d99 100%);
+            min-height: 100vh;
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: var(--navy-dark);
+            padding: 1rem 2rem;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--navy-dark);
+            border: 2px solid var(--white);
+        }
+
+        .header-text h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .error-content {
+            max-width: 500px;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .error-title {
+            font-size: 1.75rem;
+            margin: 1rem 0;
+            color: var(--white);
+        }
+
+        .error-message {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .nav-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--navy-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 162, 39, 0.4);
+        }
+
+        .nav-link.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--gold);
+            color: var(--gold-light);
+        }
+
+        .nav-link.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--gray);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            .error-code {
+                font-size: 5rem;
+            }
+
+            .error-title {
+                font-size: 1.25rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+            }
+
+            .nav-link {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">RC</div>
+            <div class="header-text">
+                <h1>Reserve Retirement Calculator</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="error-content">
+            <div class="error-code">404</div>
+            <h2 class="error-title">Page Not Found</h2>
+            <p class="error-message">
+                The page you're looking for doesn't exist or has been moved.
+                Let's get you back on course.
+            </p>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Retirement Basics</a>
+                <a href="calculator.html" class="nav-link secondary">Retirement Calculator</a>
+                <a href="early-retirement-calculator.html" class="nav-link secondary">Early Retirement</a>
+                <a href="resources.html" class="nav-link secondary">Resources</a>
+            </nav>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>ReserveRetirement.org | Not affiliated with DoD or any government agency</p>
+    </footer>
+</body>
+</html>

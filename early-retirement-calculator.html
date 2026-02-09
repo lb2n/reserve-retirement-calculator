@@ -3,11 +3,16 @@
 ================================================================================
 RESERVE EARLY RETIREMENT ELIGIBILITY CALCULATOR
 ================================================================================
-Version: 1.4.0
-Last Updated: January 29, 2026
+Version: 1.5.0
+Last Updated: February 9, 2026
 
 CHANGE LOG:
 -----------
+v1.5.0 (2026-02-09)
+  - Site restructure: guide.html renamed to index.html (homepage), index.html renamed to calculator.html
+  - Updated navigation order: Retirement Basics | Calculator | Early Retirement | Resources | About
+  - Changed "Retirement 101" to "Retirement Basics" throughout
+
 v1.4.0 (2026-01-29)
   - Added Google Analytics 4 tracking (placeholder ID)
 
@@ -51,9 +56,11 @@ v0.1.0 (2026-01-27)
   - Navy theme with Blue Angels background
 
 FILES IN THIS PROJECT:
-  - index.html - Main retirement pay calculator
+  - index.html - Retirement Basics guide (homepage)
+  - calculator.html - Main retirement pay calculator
   - early-retirement-calculator.html (this file) - NDAA early retirement eligibility
   - resources.html - Official links and legislation
+  - about.html - About this site
   - BlueAngelsPic.jpeg - Background image
   - favicon.svg - Site icon (RC logo)
 ================================================================================
@@ -67,14 +74,19 @@ FILES IN THIS PROJECT:
     <meta name="author" content="Reserve Retirement Calculator">
     <meta name="robots" content="index, follow">
 
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://reserveretirement.org/early-retirement-calculator.html">
+
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Reserve Early Retirement Eligibility Calculator">
+    <meta property="og:url" content="https://reserveretirement.org/early-retirement-calculator.html">
+    <meta property="og:title" content="Early Retirement Calculator | ReserveRetirement.org">
     <meta property="og:description" content="Calculate your reduced retirement age based on qualifying active duty service under NDAA 2008.">
+    <meta property="og:image" content="https://reserveretirement.org/BlueAngelsPic.jpeg">
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Reserve Early Retirement Eligibility Calculator">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Early Retirement Calculator | ReserveRetirement.org">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -87,7 +99,7 @@ FILES IN THIS PROJECT:
         gtag('config', 'G-YNHTMMMQLH');
     </script>
 
-    <title>Early Retirement Eligibility Calculator | Reserve & National Guard</title>
+    <title>Early Retirement Calculator | ReserveRetirement.org</title>
     <style>
         :root {
             --navy-primary: #003366;
@@ -822,8 +834,9 @@ FILES IN THIS PROJECT:
     <!-- Navigation -->
     <nav class="nav-bar" aria-label="Main navigation">
         <ul>
-            <li><a href="index.html">Retirement Pay Calculator</a></li>
-            <li><a href="early-retirement-calculator.html" class="active" aria-current="page">Early Retirement Eligibility</a></li>
+            <li><a href="index.html">Retirement Basics</a></li>
+            <li><a href="calculator.html">Calculator</a></li>
+            <li><a href="early-retirement-calculator.html" class="active" aria-current="page">Early Retirement</a></li>
             <li><a href="resources.html">Resources</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfKhErr4BO_aHdw9AwsmWrha2Kskb7iEGDiJKxghC11zMaY7w/viewform" target="_blank" rel="noopener noreferrer">Feedback</a></li>
@@ -937,7 +950,7 @@ FILES IN THIS PROJECT:
                 </div>
 
                 <button class="calculate-btn" onclick="calculateReduction()">
-                    ⚓ Calculate Age Reduction
+                    Calculate Age Reduction
                 </button>
             </div>
 
@@ -1128,11 +1141,14 @@ FILES IN THIS PROJECT:
         <a href="https://www.dfas.mil" target="_blank" rel="noopener noreferrer">DFAS</a> records.</p>
         <p style="margin-top: 0.5rem;">Based on 2008 NDAA (P.L. 110-181) and subsequent amendments</p>
         <p style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-            <a href="index.html">Privacy Policy</a> |
-            <a href="index.html">Terms of Use</a>
+            <a href="index.html">Retirement Basics</a> |
+            <a href="calculator.html">Calculator</a> |
+            <a href="early-retirement-calculator.html">Early Retirement</a> |
+            <a href="resources.html">Resources</a> |
+            <a href="about.html">About</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray);">
-            This site is not affiliated with the Department of Defense, DFAS, or any government agency.
+            ReserveRetirement.org is not affiliated with the Department of Defense, DFAS, or any government agency.
         </p>
     </footer>
 

@@ -1,0 +1,11 @@
+# robots.txt for ReserveRetirement.org
+# https://reserveretirement.org/robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://reserveretirement.org/sitemap.xml
+
+# Crawl-delay (optional, be polite to the server)
+Crawl-delay: 1

@@ -1,0 +1,43 @@
+# Cloudflare Pages Redirects
+# Format: /old-path /new-path [status-code]
+#
+# IMPORTANT: Do NOT create redirects for paths that match actual filenames
+# (e.g., /calculator when calculator.html exists) - this causes redirect loops!
+#
+# Last Updated: February 9, 2026
+# Structure:
+#   - index.html = Retirement Basics (homepage)
+#   - calculator.html = Retirement Calculator
+#   - early-retirement-calculator.html = Early Retirement Calculator
+#   - resources.html = Resources
+#   - about.html = About
+
+# Calculator page shortcuts (NOT /calculator - that matches calculator.html!)
+/calc                /calculator.html     301
+/estimate            /calculator.html     301
+/pay                 /calculator.html     301
+
+# Homepage shortcuts (NOT /index - that matches index.html!)
+/home                /index.html          301
+/101                 /index.html          301
+/basics              /index.html          301
+/learn               /index.html          301
+/retirement-101      /index.html          301
+/retirement-basics   /index.html          301
+
+# Legacy redirect - guide.html now lives at index.html
+/guide.html          /                    301
+/guide               /                    301
+
+# Early retirement calculator shortcuts (NOT /early-retirement-calculator!)
+/early-retirement    /early-retirement-calculator.html    301
+/early               /early-retirement-calculator.html    301
+/ndaa                /early-retirement-calculator.html    301
+
+# Resources shortcuts (NOT /resources - that matches resources.html!)
+/links               /resources.html      301
+
+# About page shortcuts (NOT /about - that matches about.html!)
+/about-us            /about.html          301
+/contact             /about.html          301
+/feedback            /about.html          301

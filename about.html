@@ -3,11 +3,17 @@
 ================================================================================
 ABOUT PAGE
 ================================================================================
-Version: 1.2.0
-Last Updated: January 29, 2026
+Version: 1.3.0
+Last Updated: February 9, 2026
 
 CHANGE LOG:
 -----------
+v1.3.0 (2026-02-09)
+  - Site restructure: guide.html renamed to index.html (homepage), index.html renamed to calculator.html
+  - Updated navigation order: Retirement Basics | Calculator | Early Retirement | Resources | About
+  - Changed "Retirement 101" to "Retirement Basics" throughout
+  - Added "tribal knowledge" explanation paragraph
+
 v1.2.0 (2026-01-29)
   - Added Google Analytics 4 tracking (placeholder ID)
 
@@ -21,7 +27,8 @@ v1.0.0 (2026-01-27)
   - Initial release
 
 FILES IN THIS PROJECT:
-  - index.html - Main retirement pay calculator
+  - index.html - Retirement Basics guide (homepage)
+  - calculator.html - Main retirement pay calculator
   - early-retirement-calculator.html - NDAA early retirement eligibility
   - resources.html - Official links and legislation
   - about.html (this file) - About this site
@@ -33,9 +40,23 @@ FILES IN THIS PROJECT:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="About the Reserve Retirement Calculator - a free tool to help military reservists estimate their retirement pay.">
-    <meta name="author" content="Reserve Retirement Calculator">
+    <meta name="description" content="About ReserveRetirement.org - a free tool to help military reservists estimate their retirement pay.">
+    <meta name="author" content="ReserveRetirement.org">
     <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://reserveretirement.org/about.html">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://reserveretirement.org/about.html">
+    <meta property="og:title" content="About | ReserveRetirement.org">
+    <meta property="og:description" content="About ReserveRetirement.org - a free tool to help military reservists estimate their retirement pay.">
+    <meta property="og:image" content="https://reserveretirement.org/BlueAngelsPic.jpeg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About | ReserveRetirement.org">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -48,7 +69,7 @@ FILES IN THIS PROJECT:
         gtag('config', 'G-YNHTMMMQLH');
     </script>
 
-    <title>About | Reserve Retirement Calculator</title>
+    <title>About | ReserveRetirement.org</title>
     <style>
         :root {
             --navy-primary: #003366;
@@ -353,8 +374,9 @@ FILES IN THIS PROJECT:
 
     <nav class="nav-bar" aria-label="Main navigation">
         <ul>
-            <li><a href="index.html">Retirement Pay Calculator</a></li>
-            <li><a href="early-retirement-calculator.html">Early Retirement Eligibility</a></li>
+            <li><a href="index.html">Retirement Basics</a></li>
+            <li><a href="calculator.html">Calculator</a></li>
+            <li><a href="early-retirement-calculator.html">Early Retirement</a></li>
             <li><a href="resources.html">Resources</a></li>
             <li><a href="about.html" class="active" aria-current="page">About</a></li>
             <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfKhErr4BO_aHdw9AwsmWrha2Kskb7iEGDiJKxghC11zMaY7w/viewform" target="_blank" rel="noopener noreferrer">Feedback</a></li>
@@ -379,6 +401,8 @@ FILES IN THIS PROJECT:
             <p>If you've ever tried to figure out your reserve retirement pay, you know the struggle: scattered information across dozens of government websites, confusing regulations, and calculations that seem designed to require a PhD in military personnel administration.</p>
 
             <p>We built these calculators to give reservists and National Guard members a quick, easy way to estimate their retirement benefits without having to decode DFAS publications or parse Title 10 of the U.S. Code.</p>
+
+            <p>Reserve retirement is tribal knowledge—you shouldn't have to serve for 20+ years and have it explained to you a dozen times before you finally start to understand it. This site aims to change that by making the information accessible to everyone from day one.</p>
 
             <div class="highlight-box">
                 <h3>🛠️ How This Was Built</h3>
@@ -406,10 +430,11 @@ FILES IN THIS PROJECT:
     </main>
 
     <footer class="footer" role="contentinfo">
-        <p>This site is not affiliated with the Department of Defense, DFAS, or any government agency.</p>
+        <p>ReserveRetirement.org is not affiliated with the Department of Defense, DFAS, or any government agency.</p>
         <p style="margin-top: 0.5rem;">
-            <a href="index.html">Retirement Pay Calculator</a> |
-            <a href="early-retirement-calculator.html">Early Retirement Eligibility</a> |
+            <a href="index.html">Retirement Basics</a> |
+            <a href="calculator.html">Calculator</a> |
+            <a href="early-retirement-calculator.html">Early Retirement</a> |
             <a href="resources.html">Resources</a> |
             <a href="about.html">About</a>
         </p>

@@ -3,11 +3,16 @@
 ================================================================================
 RESERVE RETIREMENT RESOURCES
 ================================================================================
-Version: 1.4.1
-Last Updated: February 6, 2026
+Version: 1.5.0
+Last Updated: February 9, 2026
 
 CHANGE LOG:
 -----------
+v1.5.0 (2026-02-09)
+  - Site restructure: guide.html renamed to index.html (homepage), index.html renamed to calculator.html
+  - Updated navigation order: Retirement Basics | Calculator | Early Retirement | Resources | About
+  - Changed "Retirement 101" to "Retirement Basics" throughout
+
 v1.4.1 (2026-02-06)
   - Added "Links last verified" date to footer
 
@@ -41,9 +46,11 @@ v1.0.0 (2026-01-27)
   - Navy theme with Blue Angels background
 
 FILES IN THIS PROJECT:
-  - index.html - Main retirement pay calculator
+  - index.html - Retirement Basics guide (homepage)
+  - calculator.html - Main retirement pay calculator
   - early-retirement-calculator.html - NDAA early retirement eligibility
   - resources.html (this file) - Official links and legislation
+  - about.html - About this site
   - BlueAngelsPic.jpeg - Background image
   - favicon.svg - Site icon (RC logo)
 ================================================================================
@@ -57,14 +64,19 @@ FILES IN THIS PROJECT:
     <meta name="author" content="Reserve Retirement Calculator">
     <meta name="robots" content="index, follow">
 
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://reserveretirement.org/resources.html">
+
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Reserve Retirement Resources">
+    <meta property="og:url" content="https://reserveretirement.org/resources.html">
+    <meta property="og:title" content="Reserve Retirement Resources | ReserveRetirement.org">
     <meta property="og:description" content="Official resources and legislation for U.S. military reserve retirement benefits.">
+    <meta property="og:image" content="https://reserveretirement.org/BlueAngelsPic.jpeg">
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Reserve Retirement Resources">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Reserve Retirement Resources | ReserveRetirement.org">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -466,8 +478,9 @@ FILES IN THIS PROJECT:
 
     <nav class="nav-bar" aria-label="Main navigation">
         <ul>
-            <li><a href="index.html">Retirement Pay Calculator</a></li>
-            <li><a href="early-retirement-calculator.html">Early Retirement Eligibility</a></li>
+            <li><a href="index.html">Retirement Basics</a></li>
+            <li><a href="calculator.html">Calculator</a></li>
+            <li><a href="early-retirement-calculator.html">Early Retirement</a></li>
             <li><a href="resources.html" class="active" aria-current="page">Resources</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfKhErr4BO_aHdw9AwsmWrha2Kskb7iEGDiJKxghC11zMaY7w/viewform" target="_blank" rel="noopener noreferrer">Feedback</a></li>
@@ -715,15 +728,17 @@ FILES IN THIS PROJECT:
     </main>
 
     <footer class="footer" role="contentinfo">
-        <p>This resource page provides links to official government sources. We are not affiliated with the Department of Defense, DFAS, or any government agency.</p>
+        <p>This resource page provides links to official government sources. ReserveRetirement.org is not affiliated with the Department of Defense, DFAS, or any government agency.</p>
         <p style="margin-top: 0.5rem;">Links are provided for informational purposes. Always verify information with official sources.</p>
         <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray);">
             <em>All links last verified: January 28, 2026</em>
         </p>
         <p style="margin-top: 1rem;">
-            <a href="index.html">Retirement Pay Calculator</a> |
-            <a href="early-retirement-calculator.html">Early Retirement Eligibility</a> |
-            <a href="resources.html">Resources</a>
+            <a href="index.html">Retirement Basics</a> |
+            <a href="calculator.html">Calculator</a> |
+            <a href="early-retirement-calculator.html">Early Retirement</a> |
+            <a href="resources.html">Resources</a> |
+            <a href="about.html">About</a>
         </p>
     </footer>
 </body>
