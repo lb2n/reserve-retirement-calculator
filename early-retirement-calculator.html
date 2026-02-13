@@ -3,11 +3,17 @@
 ================================================================================
 RESERVE EARLY RETIREMENT ELIGIBILITY CALCULATOR
 ================================================================================
-Version: 1.5.0
-Last Updated: February 9, 2026
+Version: 1.6.0
+Last Updated: February 13, 2026
 
 CHANGE LOG:
 -----------
+v1.6.0 (2026-02-13)
+  - Clarified early retirement affects PAY only, not medical benefits
+  - Added prominent warning that TRICARE still starts at age 60 regardless of early pay
+  - Added ReserveRetirement.org clickable link in header
+  - Updated privacy statement to mention Google Analytics
+
 v1.5.0 (2026-02-09)
   - Site restructure: guide.html renamed to index.html (homepage), index.html renamed to calculator.html
   - Updated navigation order: Retirement Basics | Calculator | Early Retirement | Resources | About
@@ -846,6 +852,7 @@ FILES IN THIS PROJECT:
     <header class="header" role="banner">
         <div class="header-content">
             <div class="header-text">
+                <p style="margin-bottom: 0.25rem;"><a href="index.html" style="color: var(--gold); text-decoration: none; font-size: 0.9rem;">ReserveRetirement.org</a></p>
                 <h1>Early Retirement Eligibility Calculator</h1>
                 <p>Calculate Your Reduced Retirement Age Based on Qualifying Active Duty</p>
             </div>
@@ -856,19 +863,20 @@ FILES IN THIS PROJECT:
         <div class="disclaimer" role="alert">
             <strong>⚠️ Disclaimer:</strong> This calculator provides <strong>estimates only</strong> based on the 2008 NDAA and subsequent amendments.
             Verify your qualifying service with your personnel office. Rules differ based on when orders were issued and fiscal year boundaries.
-            <strong>We do not collect or store any information you enter.</strong>
+            <strong>Your inputs stay in your browser—we don't store them.</strong> We use Google Analytics for anonymous traffic statistics only.
         </div>
 
         <div class="info-box">
             <h3>📋 How Early Retirement Works</h3>
-            <p>The 2008 National Defense Authorization Act allows Reserve and Guard members to reduce their retirement eligibility age below 60 (minimum age 50) based on qualifying active duty service after January 28, 2008.</p>
+            <p>The 2008 National Defense Authorization Act allows Reserve and Guard members to reduce their retirement <strong>pay</strong> eligibility age below 60 (minimum age 50) based on qualifying active duty service after January 28, 2008.</p>
             <ul>
                 <li><strong>90 days</strong> of qualifying service = <strong>3 months</strong> reduction in retirement age</li>
                 <li>Days can be cumulative across multiple orders</li>
                 <li>Before FY2015: Days must be within the same fiscal year</li>
                 <li>FY2015 and later: Days can span consecutive fiscal years</li>
-                <li>Maximum reduction: 10 years (retire as early as age 50)</li>
+                <li>Maximum reduction: 10 years (receive pay as early as age 50)</li>
             </ul>
+            <p style="margin-top: 0.75rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.15); border-radius: 4px;"><strong>⚠️ Important:</strong> Early retirement only affects when you start receiving <strong>retirement pay</strong>. TRICARE and other medical benefits still begin at age 60 regardless of your reduced pay eligibility age.</p>
         </div>
 
         <div class="main-grid">
@@ -1015,7 +1023,8 @@ FILES IN THIS PROJECT:
                     <ul style="font-size: 0.85rem; line-height: 1.6; padding-left: 1.25rem; color: var(--gray-light);">
                         <li>Only service after January 28, 2008 qualifies for early retirement</li>
                         <li>12304b orders qualify retroactively to 2011 (FY20 NDAA fix)</li>
-                        <li>Maximum reduction is 10 years (minimum eligibility age 50)</li>
+                        <li>Maximum reduction is 10 years (minimum pay eligibility age 50)</li>
+                        <li><strong>This reduction applies to retirement PAY only</strong>—TRICARE and medical benefits still begin at age 60</li>
                         <li>Verify all qualifying service with your personnel office</li>
                     </ul>
                 </div>

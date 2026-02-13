@@ -3,11 +3,17 @@
 ================================================================================
 ABOUT PAGE
 ================================================================================
-Version: 1.3.0
-Last Updated: February 9, 2026
+Version: 1.4.0
+Last Updated: February 13, 2026
 
 CHANGE LOG:
 -----------
+v1.4.0 (2026-02-13)
+  - Updated tribal knowledge sentence with more relatable explanation
+  - Changed "This site" references to ReserveRetirement.org clickable links
+  - Added ReserveRetirement.org clickable link in header
+  - Updated privacy section to explain Google Analytics usage
+
 v1.3.0 (2026-02-09)
   - Site restructure: guide.html renamed to index.html (homepage), index.html renamed to calculator.html
   - Updated navigation order: Retirement Basics | Calculator | Early Retirement | Resources | About
@@ -386,6 +392,7 @@ FILES IN THIS PROJECT:
     <header class="header" role="banner">
         <div class="header-content">
             <div class="header-text">
+                <p style="margin-bottom: 0.25rem;"><a href="index.html" style="color: var(--gold); text-decoration: none; font-size: 0.9rem;">ReserveRetirement.org</a></p>
                 <h1>About This Site</h1>
                 <p>Why We Built This & Important Disclaimers</p>
             </div>
@@ -396,17 +403,17 @@ FILES IN THIS PROJECT:
         <div class="content-card">
             <h2>Why This Exists</h2>
 
-            <p>This site was created in an attempt to make the military's mind-numbing bureaucracy slightly less mind-numbing.</p>
+            <p><a href="index.html" style="color: var(--gold);">ReserveRetirement.org</a> was created in an attempt to make the military's mind-numbing bureaucracy slightly less mind-numbing.</p>
 
             <p>If you've ever tried to figure out your reserve retirement pay, you know the struggle: scattered information across dozens of government websites, confusing regulations, and calculations that seem designed to require a PhD in military personnel administration.</p>
 
-            <p>We built these calculators to give reservists and National Guard members a quick, easy way to estimate their retirement benefits without having to decode DFAS publications or parse Title 10 of the U.S. Code.</p>
+            <p>We built this site to give reservists and National Guard members a quick, easy way to estimate their retirement benefits without having to decode DFAS publications or parse Title 10 of the U.S. Code.</p>
 
-            <p>Reserve retirement is tribal knowledge—you shouldn't have to serve for 20+ years and have it explained to you a dozen times before you finally start to understand it. This site aims to change that by making the information accessible to everyone from day one.</p>
+            <p>In the past knowledge about reserve retirements was tribal—if you were lucky someone who was probably close to retirement in your unit had taken the time to understand it and could pass that knowledge on, but not everyone was that lucky. <a href="index.html" style="color: var(--gold);">ReserveRetirement.org</a> aims to change that by making the information accessible to everyone from day one.</p>
 
             <div class="highlight-box">
                 <h3>🛠️ How This Was Built</h3>
-                <p>This site was created using <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude</a>, an AI assistant by Anthropic, through their Claude Code tool. The calculators, styling, and content were developed through an iterative conversation - proving that even complex military retirement calculations can be tackled with the right tools.</p>
+                <p><a href="index.html" style="color: var(--gold);">ReserveRetirement.org</a> was created using <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude</a>, an AI assistant by Anthropic, through their Claude Code tool. The calculators, styling, and content were developed through an iterative conversation - proving that even complex military retirement calculations can be tackled with the right tools.</p>
             </div>
 
             <div class="warning-box">
@@ -423,9 +430,11 @@ FILES IN THIS PROJECT:
 
             <h2 style="margin-top: 2rem;">Privacy</h2>
 
-            <p>This site does not collect, store, or transmit any personal information. All calculations are performed locally in your browser. We don't use tracking cookies, and we don't sell data because we don't have any data to sell.</p>
+            <p>All calculations are performed locally in your browser—we do not collect, store, or transmit any personal information you enter into the calculators.</p>
 
-            <p>The only information we receive is what you voluntarily submit through our feedback form.</p>
+            <p>We use <strong>Google Analytics</strong> to collect anonymous usage data (page views, visit counts, general location by country/region) to understand how many people visit the site and which pages are most useful. This helps us justify the effort that goes into keeping the site updated and accurate. Google Analytics does not collect any personal information or calculator inputs.</p>
+
+            <p>The only other information we receive is what you voluntarily submit through our feedback form.</p>
         </div>
     </main>
 

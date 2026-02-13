@@ -3,11 +3,15 @@
 ================================================================================
 RESERVE RETIREMENT PAY CALCULATOR
 ================================================================================
-Version: 2.0.0
-Last Updated: February 9, 2026
+Version: 2.1.0
+Last Updated: February 13, 2026
 
 CHANGE LOG:
 -----------
+v2.1.0 (2026-02-13)
+  - Added ReserveRetirement.org clickable link in header
+  - Updated privacy statements to mention Google Analytics
+
 v2.0.0 (2026-02-09)
   - Moved to calculator.html (homepage is now Retirement Basics)
   - Updated navigation order: Basics first
@@ -1332,7 +1336,7 @@ FILES IN THIS PROJECT:
                 <li>Pay tables, COLA rates, and regulations may change</li>
                 <li>For official retirement pay calculations, contact <strong>DFAS</strong> or your servicing personnel office</li>
                 <li>This tool does not constitute financial or legal advice</li>
-                <li>We do not collect or store any personal information you enter</li>
+                <li>We do not collect or store any personal information you enter (we use Google Analytics for anonymous page view statistics only)</li>
             </ul>
             <p>Always verify important financial decisions with official sources.</p>
             <div class="modal-buttons">
@@ -1357,6 +1361,7 @@ FILES IN THIS PROJECT:
     <header class="header" role="banner">
         <div class="header-content">
             <div class="header-text">
+                <p style="margin-bottom: 0.25rem;"><a href="index.html" style="color: var(--gold); text-decoration: none; font-size: 0.9rem;">ReserveRetirement.org</a></p>
                 <h1>Reserve Retirement Pay Calculator</h1>
                 <p>Estimate Your Reserve/Guard (Non-Regular) Retired Pay</p>
             </div>
@@ -1367,7 +1372,7 @@ FILES IN THIS PROJECT:
         <div class="disclaimer" role="alert">
             <strong>⚠️ Disclaimer:</strong> This calculator provides <strong>estimates only</strong> and should not be used for official planning purposes.
             Actual retirement pay may vary based on individual circumstances. Consult with a military pay office or <a href="https://www.dfas.mil" target="_blank" rel="noopener noreferrer">DFAS</a> for official calculations.
-            Pay rates are based on 2026 military pay tables. <strong>We do not collect or store any information you enter.</strong>
+            Pay rates are based on 2026 military pay tables. <strong>Your inputs stay in your browser—we don't store them.</strong> We use Google Analytics for anonymous traffic statistics only.
         </div>
 
         <div class="main-grid">
@@ -2422,7 +2427,7 @@ FILES IN THIS PROJECT:
         }
 
         function showPrivacyPolicy() {
-            alert('Privacy Policy\n\nThis calculator does not collect, store, or transmit any personal information. All calculations are performed locally in your browser. No data is sent to any server.\n\nWe do not use cookies for tracking purposes. Your inputs are not saved when you leave this page.');
+            alert('Privacy Policy\n\nThis calculator does not collect, store, or transmit any personal information you enter. All calculations are performed locally in your browser.\n\nWe use Google Analytics to collect anonymous usage statistics (page views, visit counts, general location) to understand how many people use the site. This helps us justify the effort to keep it updated. Google Analytics does not collect any calculator inputs or personal information.\n\nYour inputs are not saved when you leave this page.');
         }
 
         function showTermsOfUse() {
